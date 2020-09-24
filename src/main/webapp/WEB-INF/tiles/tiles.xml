@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+
+<tiles-definitions>
+    <!-- 부모 기본 layout -->
+    <definition name="main-template" template="/WEB-INF/tiles/layouts/main_template.jsp">
+        <put-attribute name="title" value="Main" />
+        <put-attribute name="header" value="/WEB-INF/tiles/components/main/header.jsp" />
+        <put-attribute name="menu" value="/WEB-INF/tiles/components/main/menu.jsp" />
+        <put-attribute name="footer" value="/WEB-INF/tiles/components/main/footer.jsp" />
+    </definition>
+
+    <!-- 부모 레이아웃을 상속 받는다 -->
+    <definition name="home" extends="main-template">
+        <put-attribute name="title" value="Home" />
+        <put-attribute name="content" value="/WEB-INF/views/home.jsp" />
+    </definition>
+</tiles-definitions>
