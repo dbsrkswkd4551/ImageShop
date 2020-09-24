@@ -5,6 +5,8 @@
     <table>
         <tr>
             <td width="80"><a href="/"><spring:message code="header.home" /></a></td>
+            <td width="120"><a href="/codegroup/list"><spring:message code="menu.codegroup.list" /></a></td>
+            <td width="120"><a href="/codedetail/list"><spring:message code="menu.codedetail.list" /></a></td>
             <td width="80"><a href="/board"><spring:message code="header.board" /></a></td>
             <td width="80"><a href="/notice"><spring:message code="header.notice" /></a></td>
             <td width="80"><a href="/item"><spring:message code="header.item" /></a></td>
