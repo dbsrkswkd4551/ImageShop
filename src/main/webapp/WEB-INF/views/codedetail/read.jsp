@@ -31,7 +31,11 @@
     <button type="submit" id="btnList"><spring:message code="action.list" /></button>
 </div>
 
-<script>
+<script type="text/javascript"
+
+        src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+
+<script type="text/javascript">
     $(document).ready(function() {
 
         var formObj = $("#codeDetail");

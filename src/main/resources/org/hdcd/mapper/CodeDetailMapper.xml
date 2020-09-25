@@ -34,6 +34,7 @@
 		   AND code_value = #{codeValue}
 	</select>
 
+	<!-- 코드값은(code_value) 기본키이기 때문에 수정 불가, 코드명(code_name)만 수정 -->
     <update id="update">
 		UPDATE code_detail
 		   SET code_name =#{codeName}
