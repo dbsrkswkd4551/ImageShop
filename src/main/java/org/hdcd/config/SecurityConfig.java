@@ -33,6 +33,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
                 .loginProcessingUrl("/login")
                 .successHandler(createAuthenticationSuccessHandler());
 
+        http.logout()
+                .logoutUrl("/auth/logout")
+                .invalidateHttpSession(true)
+                .deleteCookies("remember-me", "JSESSION_ID");
+                //로그아웃을 하면 자동 로그인에 사용되는 쿠키를 삭제해준다
+
         http.exceptionHandling()
                 .accessDeniedHandler(createAccessDeniedHandler());
 
