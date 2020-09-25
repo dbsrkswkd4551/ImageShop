@@ -9,6 +9,9 @@
 <form:form modelAttribute="board" action="modify">
     <form:hidden path="boardNo" />
 
+    <input type="hidden" name="page" value="${pgrq.page}">
+    <input type="hidden" name="sizePerPage" value="${pgrq.sizePerPage}">
+
     <table>
         <tr>
             <td><spring:message code="board.title" /></td>
@@ -58,7 +61,7 @@
         });
 
         $("#btnList").on("click", function() {
-            self.location = "list";
+            self.location = "list${pgrq.toUriString()}";
         });
 
     });

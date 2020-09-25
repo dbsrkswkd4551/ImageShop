@@ -2,6 +2,7 @@ package org.hdcd.service;
 
 import java.util.List;
 
+import org.hdcd.common.domain.PageRequest;
 import org.hdcd.domain.Board;
 
 public interface BoardService {
@@ -14,6 +15,8 @@ public interface BoardService {
 
     public void remove(Integer boardNo) throws Exception;
 
-    public List<Board> list() throws Exception;
+    public List<Board> list(PageRequest pageRequest) throws Exception;
+
+    public int count() throws  Exception;
 
 }

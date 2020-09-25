@@ -9,6 +9,9 @@
 <form:form modelAttribute="board">
     <form:hidden path="boardNo" />
 
+    <input type="hidden" name="page" value="${pgrq.page}">
+    <input type="hidden" name="sizePerPage" value="${pgrq.sizePerPage}">
+
     <table>
         <tr>
             <td><spring:message code="board.title" /></td>
@@ -55,11 +58,17 @@
 
         var formObj = $("#board");
 
+        var pageObj = $('#page');
+        var sizePerPageObj = $('#sizePerPage');
+        var pageVal = pageObj.val();
+        var sizePerPageVal = sizePerPageObj.val();
+
+
         $("#btnEdit").on("click", function() {
             var boardNo = $("#boardNo");
             var boardNoVal = boardNo.val();
 
-            self.location = "/board/modify?boardNo=" + boardNoVal;
+            self.location = "/board/modify${pgrq.toUriString()}" + "&boardNo=" + boardNoVal;
         });
 
         $("#btnRemove").on("click", function() {
@@ -68,7 +77,7 @@
         });
 
         $("#btnList").on("click", function() {
-            self.location = "/board/list";
+            self.location = "/board/list${pgrq.toUriString()}";
         });
 
     });
