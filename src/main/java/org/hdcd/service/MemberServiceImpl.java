@@ -76,4 +76,23 @@ public class MemberServiceImpl implements MemberService{
     public List<Member> list() throws Exception {
         return mapper.list();
     }
+
+    @Override
+    public int countAll() throws Exception {
+        return mapper.countAll();
+    }
+
+    @Transactional
+    @Override
+    public void setupAdmin(Member member) throws Exception{
+        mapper.create(member);
+
+        MemberAuth memberAuth = new MemberAuth();
+
+        memberAuth.setUserNo(member.getUserNo());
+        memberAuth.setAuth("ROLE_ADMIN");
+
+        mapper.createAuth(memberAuth);
+    }
+
 }

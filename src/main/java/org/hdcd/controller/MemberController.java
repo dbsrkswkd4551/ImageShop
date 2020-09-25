@@ -108,4 +108,35 @@ public class MemberController {
 
         return "redirect:/user/list";
     }
+
+    @RequestMapping(value = "/setup", method = RequestMethod.GET)
+    public String setupAdminForm(Member member, Model model) throws Exception {
+        //회원 테이블의 데이터를 조회하여 회원 데이터가 없으면 최초 관리자 등록화면 표시
+        if(service.countAll() == 0){
+            return "user/setup";
+        }
+
+        //회원 테이블에 데이터가 존재하면 실패 화면 표시
+        return "user/setupFailure";
+    }
+
+    @RequestMapping(value = "/setup", method = RequestMethod.POST)
+    public String setupAdmin(Member member, RedirectAttributes rttr) throws Exception {
+
+        //회원 데이터가 없을 경우 최초 관리자 생성
+        if(service.countAll()==0) {
+            String inputPassword = member.getUserPw();
+            member.setUserPw(passwordEncoder.encode(inputPassword));
+
+            member.setJob("00");
+
+            service.setupAdmin(member);
+
+            rttr.addFlashAttribute("userName", member.getUserName());
+            return "redirect:/user/registerSuccess";
+        }
+
+        return "redirect:/user/setupFailure";
+    }
+
 }

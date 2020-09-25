@@ -19,4 +19,8 @@ public interface MemberMapper {
     public void createAuth(MemberAuth memberAuth) throws Exception;
 
     public void deleteAuth(int userNo) throws Exception;
+
+    public int countAll() throws Exception;
+
+    public Member readByUserId(String userId);
 }

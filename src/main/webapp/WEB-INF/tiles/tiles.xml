@@ -35,4 +35,15 @@
         <put-attribute name="content" value="/WEB-INF/views/user/{1}.jsp" />
     </definition>
 
+    <!-- 로그인 페이지 레이아웃 -->
+    <definition name="common-template" template="/WEB-INF/tiles/layouts/common_template.jsp">
+        <put-attribute name="title" value="Common" />
+        <put-attribute name="header" value="/WEB-INF/tiles/components/common/header.jsp" />
+    </definition>
+
+    <definition name="auth/*" extends="common-template">
+        <put-attribute name="title" value="Login" />
+        <put-attribute name="content" value="/WEB-INF/views/auth/{1}.jsp" />
+    </definition>
+
 </tiles-definitions>
