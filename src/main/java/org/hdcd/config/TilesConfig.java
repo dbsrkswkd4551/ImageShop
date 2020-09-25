@@ -9,8 +9,6 @@ import org.springframework.web.servlet.view.tiles3.TilesViewResolver;
 @Configuration
 public class TilesConfig {
 
-    //타일즈의 위치 정의, 불러오기, 배치
-    //tiles.xml 위치 디렉토리 정의, 리프레쉬 가능 여부 설정
     @Bean
     public TilesConfigurer tilesConfigurer() {
         final TilesConfigurer configurer = new TilesConfigurer();
@@ -22,10 +20,11 @@ public class TilesConfig {
     }
 
     @Bean
-    public TilesViewResolver tilesViewResolver(){
+    public TilesViewResolver tilesViewResolver() {
         final TilesViewResolver tilesViewResolver = new TilesViewResolver();
         tilesViewResolver.setViewClass(TilesView.class);
 
         return tilesViewResolver;
     }
+
 }

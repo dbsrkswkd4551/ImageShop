@@ -10,9 +10,8 @@ import lombok.ToString;
 @Setter
 @ToString
 public class CodeLabelValue {
+
     private final String value;
     private final String label;
-
-
 
 }

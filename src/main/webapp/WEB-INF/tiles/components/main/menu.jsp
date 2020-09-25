@@ -9,7 +9,7 @@
 
             <!-- 로그인을 하지 않은 경우 true -->
             <sec:authorize access="!isAuthenticated()">
-
+                <td width="120"><a href="/board/list"><spring:message code="menu.board.member" /></a></td>
             </sec:authorize>
 
                 <!-- 관리자 권한을 가진 사용자인 경우 true-->
@@ -18,11 +18,12 @@
             <td width="120"><a href="/codegroup/list"><spring:message code="menu.codegroup.list" /></a></td>
             <td width="120"><a href="/codedetail/list"><spring:message code="menu.codedetail.list" /></a></td>
             <td width="120"><a href="/user/list"><spring:message code="menu.user.admin" /></a></td>
+            <td width="120"><a href="/board/list"><spring:message code="menu.board.member" /></a></td>
                 </sec:authorize>
 
                 <!-- 회원 권한을 가진 사용자인 경우 true -->
                 <sec:authorize access="hasRole('ROLE_MEMBER')">
-
+                    <td width="120"><a href="/board/list"><spring:message code="menu.board.member" /></a></td>
                 </sec:authorize>
 
 

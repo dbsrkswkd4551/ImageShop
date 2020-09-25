@@ -1,15 +1,16 @@
 package org.hdcd.domain;
 
+import java.util.Date;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-
-import java.util.Date;
 
 @Getter
 @Setter
 @ToString
 public class CodeDetail {
+
     private String groupCode;
     private String codeValue;
     private String codeName;
@@ -17,4 +18,5 @@ public class CodeDetail {
     private String useYn;
     private Date regDate;
     private Date updDate;
+
 }

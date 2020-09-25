@@ -12,9 +12,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/codegroup")
-//관리자 권한을 가진 사용자만 접근이 가능하다
 @PreAuthorize("hasRole('ROLE_ADMIN')")
 public class CodeGroupController {
+
     @Autowired
     private CodeGroupService service;
 
@@ -45,6 +45,7 @@ public class CodeGroupController {
 
     @RequestMapping(value = "/remove", method = RequestMethod.POST)
     public String remove(String groupCode, RedirectAttributes rttr) throws Exception {
+
         service.remove(groupCode);
 
         rttr.addFlashAttribute("msg", "SUCCESS");
@@ -55,7 +56,6 @@ public class CodeGroupController {
     @RequestMapping(value = "/modify", method = RequestMethod.GET)
     public void modifyForm(String groupCode, Model model) throws Exception {
         model.addAttribute(service.read(groupCode));
-
     }
 
     @RequestMapping(value = "/modify", method = RequestMethod.POST)
@@ -65,7 +65,5 @@ public class CodeGroupController {
 
         return "redirect:/codegroup/list";
     }
-
-
 
 }

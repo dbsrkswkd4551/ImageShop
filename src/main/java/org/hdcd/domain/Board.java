@@ -9,12 +9,12 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class CodeGroup {
+public class Board {
 
-    private String groupCode;
-    private String groupName;
-    private String useYn;
+    private int boardNo;
+    private String title;
+    private String content;
+    private String writer;
     private Date regDate;
-    private Date updDate;
 
 }

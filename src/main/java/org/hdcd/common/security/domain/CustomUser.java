@@ -1,16 +1,17 @@
 package org.hdcd.common.security.domain;
 
+import java.util.Collection;
+import java.util.stream.Collectors;
+
 import org.hdcd.domain.Member;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 
-import java.util.Collection;
-import java.util.stream.Collectors;
+public class CustomUser extends User {
 
-public class CustomUser extends User{
     private static final long serialVersionUID = 1L;
-    
+
     private Member member;
 
     public CustomUser(String username, String password, Collection<? extends GrantedAuthority> authorities) {
@@ -27,4 +28,5 @@ public class CustomUser extends User{
     public Member getMember() {
         return member;
     }
+
 }

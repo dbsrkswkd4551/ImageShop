@@ -1,13 +1,13 @@
 package org.hdcd.domain;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import java.util.Date;
+import java.util.List;
 
 import javax.validation.constraints.NotBlank;
 
-import java.util.Date;
-import java.util.List;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
@@ -34,4 +34,5 @@ public class Member {
     private Date updDate;
 
     private List<MemberAuth> authList;
+
 }

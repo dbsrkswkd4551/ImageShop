@@ -1,15 +1,17 @@
 package org.hdcd.common.security;
 
-import lombok.extern.java.Log;
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.hdcd.common.security.domain.CustomUser;
 import org.hdcd.domain.Member;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
+import lombok.extern.java.Log;
 
 @Log
 public class CustomLoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler {
@@ -24,4 +26,5 @@ public class CustomLoginSuccessHandler extends SavedRequestAwareAuthenticationSu
 
         super.onAuthenticationSuccess(request, response, authentication);
     }
+
 }

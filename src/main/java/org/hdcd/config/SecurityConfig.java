@@ -21,7 +21,7 @@ import org.springframework.security.web.authentication.rememberme.JdbcTokenRepos
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
+@EnableGlobalMethodSecurity(prePostEnabled=true, securedEnabled=true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
     @Autowired
@@ -30,16 +30,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.formLogin()
-
                 .loginPage("/auth/login")
                 .loginProcessingUrl("/login")
                 .successHandler(createAuthenticationSuccessHandler());
 
         http.logout()
                 .logoutUrl("/auth/logout")
-                .invalidateHttpSession(true)
-                .deleteCookies("remember-me", "JSESSION_ID");
-                //로그아웃을 하면 자동 로그인에 사용되는 쿠키를 삭제해준다
+                .invalidateHttpSession(true);
 
         http.exceptionHandling()
                 .accessDeniedHandler(createAccessDeniedHandler());
@@ -72,8 +69,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(createUserDetailsService())
-                .passwordEncoder(createPasswordEncoder());
+
+        auth.userDetailsService(createUserDetailsService()).passwordEncoder(createPasswordEncoder());
     }
 
     private PersistentTokenRepository createJDBCRepository() {

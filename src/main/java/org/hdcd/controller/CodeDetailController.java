@@ -1,5 +1,7 @@
 package org.hdcd.controller;
 
+import java.util.List;
+
 import org.hdcd.common.domain.CodeLabelValue;
 import org.hdcd.domain.CodeDetail;
 import org.hdcd.service.CodeDetailService;
@@ -12,13 +14,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.List;
-
 @Controller
 @RequestMapping("/codedetail")
-//관리자 권한을 가진 사용자만 접근이 가능하다
 @PreAuthorize("hasRole('ROLE_ADMIN')")
 public class CodeDetailController {
+
     @Autowired
     private CodeDetailService codeDetailService;
 
@@ -79,4 +79,5 @@ public class CodeDetailController {
 
         return "redirect:/codedetail/list";
     }
+
 }

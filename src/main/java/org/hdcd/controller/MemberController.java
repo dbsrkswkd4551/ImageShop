@@ -1,5 +1,7 @@
 package org.hdcd.controller;
 
+import java.util.List;
+
 import org.hdcd.common.domain.CodeLabelValue;
 import org.hdcd.domain.Member;
 import org.hdcd.service.CodeService;
@@ -15,11 +17,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.List;
-
 @Controller
 @RequestMapping("/user")
 public class MemberController {
+
     @Autowired
     private MemberService service;
 
@@ -31,28 +32,23 @@ public class MemberController {
 
     @RequestMapping(value = "/register", method = RequestMethod.GET)
     public void registerForm(Member member, Model model) throws Exception {
-        //직업코드 목록을 조회하여 뷰에 전달
         String groupCode = "A01";
         List<CodeLabelValue> jobList = codeService.getCodeList(groupCode);
 
         model.addAttribute("jobList", jobList);
-
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public String register(@Validated Member member, BindingResult result, Model model, RedirectAttributes rttr) throws Exception {
         if(result.hasErrors()) {
-            //CodeDetail의 직업코드 목록을 조회하여 뷰에 전달
             String groupCode = "A01";
             List<CodeLabelValue> jobList = codeService.getCodeList(groupCode);
 
-            //jobList key 값에 전달한다
             model.addAttribute("jobList", jobList);
 
             return "user/register";
         }
 
-        //비밀번호 암호화
         String inputPassword = member.getUserPw();
         member.setUserPw(passwordEncoder.encode(inputPassword));
 
@@ -112,22 +108,9 @@ public class MemberController {
         return "redirect:/user/list";
     }
 
-    @RequestMapping(value = "/setup", method = RequestMethod.GET)
-    public String setupAdminForm(Member member, Model model) throws Exception {
-        //회원 테이블의 데이터를 조회하여 회원 데이터가 없으면 최초 관리자 등록화면 표시
-        if(service.countAll() == 0){
-            return "user/setup";
-        }
-
-        //회원 테이블에 데이터가 존재하면 실패 화면 표시
-        return "user/setupFailure";
-    }
-
     @RequestMapping(value = "/setup", method = RequestMethod.POST)
     public String setupAdmin(Member member, RedirectAttributes rttr) throws Exception {
-
-        //회원 데이터가 없을 경우 최초 관리자 생성
-        if(service.countAll()==0) {
+        if(service.countAll() == 0) {
             String inputPassword = member.getUserPw();
             member.setUserPw(passwordEncoder.encode(inputPassword));
 
@@ -140,6 +123,15 @@ public class MemberController {
         }
 
         return "redirect:/user/setupFailure";
+    }
+
+    @RequestMapping(value = "/setup", method = RequestMethod.GET)
+    public String setupAdminForm(Member member, Model model) throws Exception {
+        if(service.countAll() == 0) {
+            return "user/setup";
+        }
+
+        return "user/setupFailure";
     }
 
 }
