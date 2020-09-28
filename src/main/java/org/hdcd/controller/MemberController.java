@@ -49,6 +49,7 @@ public class MemberController {
             return "user/register";
         }
 
+        //회원 등록 시 비밀번호 암호화
         String inputPassword = member.getUserPw();
         member.setUserPw(passwordEncoder.encode(inputPassword));
 
