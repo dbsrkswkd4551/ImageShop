@@ -11,6 +11,8 @@
 
     <input type="hidden" name="page" value="${pgrq.page}">
     <input type="hidden" name="sizePerPage" value="${pgrq.sizePerPage}">
+    <input type="hidden" name="searchType" value="${pgrq.searchType}">
+    <input type="hidden" name="keyword" value="${pgrq.keyword}">
 
     <table>
         <tr>
@@ -49,20 +51,16 @@
     <button type="submit" id="btnList"><spring:message code="action.list" /></button>
 </div>
 
-<script type="text/javascript"
-
-        src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-
-<script type="text/javascript">
+<script>
     $(document).ready(function() {
 
         var formObj = $("#board");
 
-        var pageObj = $('#page');
-        var sizePerPageObj = $('#sizePerPage');
+        var pageObj = $("#page");
+        var sizePerPageObj = $("#sizePerPage");
+
         var pageVal = pageObj.val();
         var sizePerPageVal = sizePerPageObj.val();
-
 
         $("#btnEdit").on("click", function() {
             var boardNo = $("#boardNo");

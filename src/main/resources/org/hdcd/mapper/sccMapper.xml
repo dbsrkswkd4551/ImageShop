@@ -5,11 +5,25 @@
 
 <mapper namespace="org.hdcd.mapper.sccMapper">
 
+	<sql id="search">
+		<if test="searchType != null">
+			<if test="searchType == 't'.toString()">
+				AND SCC_NAME LIKE CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test="searchType == 'd'.toString()">
+				AND SCC_DISTRICT LIKE CONCAT('%', #{keyword}, '%')
+			</if>
+		</if>
+	</sql>
     <select id="list" resultType="scc_info">
 		<![CDATA[
 	 	SELECT *
 	 	  FROM scc_info
 	 	 WHERE SCC_NUM > 0
+	 	 ]]>
+
+	 	 <include refid="search"></include>
+	 	 <![CDATA[
 	  	 ORDER BY SCC_NUM ASC
 		 LIMIT #{pageStart}, #{sizePerPage}
 		]]>
@@ -21,6 +35,7 @@
 		  FROM scc_info
 		 WHERE SCC_NUM > 0
 		]]>
+		<include refid="search"></include>
 	</select>
 
 </mapper>

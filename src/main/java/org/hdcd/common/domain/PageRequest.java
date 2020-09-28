@@ -8,6 +8,10 @@ public class PageRequest {
     private int page;
     private int sizePerPage;
 
+    private String searchType;
+    private String keyword;
+
+
     public PageRequest() {
         this.page = 1;
         this.sizePerPage = 10;
@@ -43,13 +47,50 @@ public class PageRequest {
         return this.sizePerPage;
     }
 
+    public String getSearchType() {
+        return searchType;
+    }
+
+    public void setSearchType(String searchType) {
+        this.searchType = searchType;
+    }
+
+    public String getKeyword() {
+        return keyword;
+    }
+
+    public void setKeyword(String keyword) {
+        this.keyword = keyword;
+    }
+
     public String toUriString() {
         UriComponents uriComponents = UriComponentsBuilder.newInstance()
                 .queryParam("page", this.page)
                 .queryParam("size", this.sizePerPage)
+                .queryParam("searchType", this.searchType)
+                .queryParam("keyword", this.keyword)
                 .build();
 
         return uriComponents.toUriString();
     }
 
+    public String toUriString(int page) {
+        UriComponents uriComponents = UriComponentsBuilder.newInstance()
+                .queryParam("page", page)
+                .queryParam("size", this.sizePerPage)
+                .queryParam("searchType", this.searchType)
+                .queryParam("keyword", this.keyword)
+                .build();
+
+        return uriComponents.toUriString();
+    }
+
+    public String toUriStringByPage(int page) {
+        UriComponents uriComponents = UriComponentsBuilder.newInstance()
+                .queryParam("page", page)
+                .queryParam("size", this.sizePerPage)
+                .build();
+
+        return uriComponents.toUriString();
+    }
 }

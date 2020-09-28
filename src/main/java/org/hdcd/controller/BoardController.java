@@ -1,5 +1,9 @@
 package org.hdcd.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.hdcd.common.domain.CodeLabelValue;
 import org.hdcd.common.domain.PageRequest;
 import org.hdcd.common.domain.Pagination;
 import org.hdcd.common.security.domain.CustomUser;
@@ -52,9 +56,20 @@ public class BoardController {
         Pagination pagination = new Pagination();
         pagination.setPageRequest(pageRequest);
 
-        pagination.setTotalCount(service.count());
+        pagination.setTotalCount(service.count(pageRequest));
 
         model.addAttribute("pagination", pagination);
+
+        List<CodeLabelValue> searchTypeCodeValueList = new ArrayList<CodeLabelValue>();
+        searchTypeCodeValueList.add(new CodeLabelValue("n", "---"));
+        searchTypeCodeValueList.add(new CodeLabelValue("t", "Title"));
+        searchTypeCodeValueList.add(new CodeLabelValue("c", "Content"));
+        searchTypeCodeValueList.add(new CodeLabelValue("w", "Writer"));
+        searchTypeCodeValueList.add(new CodeLabelValue("tc", "Title OR Content"));
+        searchTypeCodeValueList.add(new CodeLabelValue("cw", "Content OR Writer"));
+        searchTypeCodeValueList.add(new CodeLabelValue("tcw", "Title OR Content OR Writer"));
+
+        model.addAttribute("searchTypeCodeValueList", searchTypeCodeValueList);
     }
 
     @RequestMapping(value = "/read", method = RequestMethod.GET)
@@ -71,6 +86,8 @@ public class BoardController {
 
         rttr.addAttribute("page", pageRequest.getPage());
         rttr.addAttribute("sizePerPage", pageRequest.getSizePerPage());
+        rttr.addAttribute("searchType", pageRequest.getSearchType());
+        rttr.addAttribute("keyword", pageRequest.getKeyword());
 
         rttr.addFlashAttribute("msg", "SUCCESS");
 
@@ -90,9 +107,10 @@ public class BoardController {
     public String modify(Board board, PageRequest pageRequest, RedirectAttributes rttr) throws Exception {
         service.modify(board);
 
-        //객체에 일회성 데이터를 지정하여 전달한다다
         rttr.addAttribute("page", pageRequest.getPage());
         rttr.addAttribute("sizePerPage", pageRequest.getSizePerPage());
+        rttr.addAttribute("searchType", pageRequest.getSearchType());
+        rttr.addAttribute("keyword", pageRequest.getKeyword());
 
         rttr.addFlashAttribute("msg", "SUCCESS");
 

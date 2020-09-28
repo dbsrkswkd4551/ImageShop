@@ -8,5 +8,5 @@ import java.util.List;
 public interface sccService {
     public List<scc_info> list(PageRequest pageRequest) throws Exception;
 
-    public int count() throws  Exception;
+    public int count(PageRequest pageRequest) throws  Exception;
 }

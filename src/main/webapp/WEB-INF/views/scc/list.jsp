@@ -7,6 +7,12 @@
 
 <h2>요양원 리스트</h2>
 
+<form:form modelAttribute="pgn" method="get" action="list${pgn.toUriStringByPage(1)}">
+    <form:select path="searchType" items="${searchTypeCodeValueList}" itemValue="value" itemLabel="label"/>
+    <form:input path="keyword"/>
+    <button id="searchBtn"><spring:message code="action.search"/> </button>
+</form:form>
+
 <table border="1">
     <tr>
         <th align="center" width="40">번호</th>
