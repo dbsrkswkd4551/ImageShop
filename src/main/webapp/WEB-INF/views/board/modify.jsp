@@ -11,6 +11,8 @@
 
     <input type="hidden" name="page" value="${pgrq.page}">
     <input type="hidden" name="sizePerPage" value="${pgrq.sizePerPage}">
+    <input type="hidden" name="searchType" value="${pgrq.searchType}">
+    <input type="hidden" name="keyword" value="${pgrq.keyword}">
 
     <table>
         <tr>

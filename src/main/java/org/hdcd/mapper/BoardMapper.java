@@ -17,6 +17,6 @@ public interface BoardMapper {
 
     public List<Board> list(PageRequest pageRequest) throws Exception;
 
-    public int count() throws Exception;
+    public int count(PageRequest pageRequest) throws Exception;
 
 }
