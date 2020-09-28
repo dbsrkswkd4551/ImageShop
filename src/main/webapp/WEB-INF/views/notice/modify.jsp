@@ -3,9 +3,11 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
-<h2><spring:message code="notice.header.register" /></h2>
+<h2><spring:message code="notice.header.modify" /></h2>
 
-<form:form modelAttribute="notice" action="register">
+<form:form modelAttribute="notice" action="modify">
+    <form:hidden path="noticeNo" />
+
     <table>
         <tr>
             <td><spring:message code="notice.title" /></td>
@@ -22,7 +24,7 @@
 
 <div>
     <sec:authorize access="hasRole('ROLE_ADMIN')">
-        <button type="submit" id="btnRegister"><spring:message code="action.register" /></button>
+        <button type="submit" id="btnModify"><spring:message code="action.modify" /></button>
     </sec:authorize>
 
     <button type="submit" id="btnList"><spring:message code="action.list" /></button>
@@ -33,7 +35,7 @@
 
         var formObj = $("#notice");
 
-        $("#btnRegister").on("click", function() {
+        $("#btnModify").on("click", function() {
             formObj.submit();
         });
 

@@ -5,33 +5,6 @@
 
 <mapper namespace="org.hdcd.mapper.NoticeMapper">
 
-    <sql id="search">
-        <if test="searchType != null">
-            <if test="searchType == 't'.toString()">
-                AND title LIKE CONCAT('%', #{keyword}, '%')
-            </if>
-            <if test="searchType == 'c'.toString()">
-                AND content LIKE CONCAT('%', #{keyword}, '%')
-            </if>
-            <if test="searchType == 'w'.toString()">
-                AND writer LIKE CONCAT('%', #{keyword}, '%')
-            </if>
-            <if test="searchType == 'tc'.toString()">
-                AND (	title LIKE CONCAT('%', #{keyword}, '%')
-                OR content LIKE CONCAT('%', #{keyword}, '%'))
-            </if>
-            <if test="searchType == 'cw'.toString()">
-                AND (	content LIKE CONCAT('%', #{keyword}, '%')
-                OR writer LIKE CONCAT('%', #{keyword}, '%'))
-            </if>
-            <if test="searchType == 'tcw'.toString()">
-                AND (	title LIKE CONCAT('%', #{keyword}, '%')
-                OR content LIKE CONCAT('%', #{keyword}, '%')
-                OR writer LIKE CONCAT('%', #{keyword}, '%'))
-            </if>
-        </if>
-    </sql>
-
     <insert id="create">
 		INSERT INTO notice
 			 (
@@ -45,56 +18,39 @@
 			 )
 	</insert>
 
-    <select id="read" resultType="Board">
-		SELECT board_no,
+    <select id="read" resultType="Notice">
+		SELECT notice_no,
 			   title,
 			   content,
-			   writer,
 			   reg_date
-		  FROM board
-		 WHERE board_no = #{boardNo}
+		  FROM notice
+		 WHERE notice_no = #{noticeNo}
 	</select>
 
     <update id="update">
-		UPDATE board
+		UPDATE notice
 		   SET title =#{title},
 			   content =#{content}
-		 WHERE board_no = #{boardNo}
+		 WHERE notice_no = #{noticeNo}
 	</update>
 
     <delete id="delete">
-		DELETE FROM board
-		 WHERE board_no = #{boardNo}
+		DELETE FROM notice
+		 WHERE notice_no = #{noticeNo}
 	</delete>
 
-    <select id="list" resultType="Board">
+    <select id="list" resultType="Notice">
         <![CDATA[
-	 	SELECT board_no,
+	 	SELECT notice_no,
 	 		   title,
 	 		   content,
-	 		   writer,
 	 		   reg_date
-	 	  FROM board
-	 	 WHERE board_no > 0
-		]]>
-
-        <include refid="search"></include>
-
-        <![CDATA[
-	  ORDER BY board_no DESC,
+	 	  FROM notice
+	 	 WHERE notice_no > 0
+	  ORDER BY notice_no DESC,
 	  		   reg_date DESC
-		 LIMIT #{pageStart}, #{sizePerPage}
 		]]>
     </select>
 
-    <select id="count" resultType="int">
-        <![CDATA[
-	 	SELECT count(board_no)
-		  FROM board
-		 WHERE board_no > 0
-		]]>
-
-        <include refid="search"></include>
-    </select>
 
 </mapper>

@@ -18,7 +18,7 @@
 
 <div align="center">
     <!-- home.jsp -->
-    <tiles:insertAttribute name="content" />
+<tiles:insertAttribute name="content" />
 </div>
 
 <!-- ALL RIGHT RESERVED -->
