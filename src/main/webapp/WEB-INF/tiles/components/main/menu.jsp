@@ -29,6 +29,8 @@
                     <td width="120"><a href="/board/list"><spring:message code="menu.board.member" /></a></td>
                     <td width="120"><a href="/notice/list"><spring:message code="menu.notice.member" /></a></td>
                     <td width="120"><a href="/item/list"><spring:message code="menu.item.member" /></a></td>
+                    <td width="120"><a href="/coin/charge"><spring:message code="menu.coin.charge" /></a></td>
+                    <td width="120"><a href="/coin/list"><spring:message code="menu.coin.list" /></a></td>
                 </sec:authorize>
 
             </sec:authorize>
