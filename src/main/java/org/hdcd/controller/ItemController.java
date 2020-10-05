@@ -4,18 +4,26 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.List;
+import java.util.Locale;
 import java.util.UUID;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.tomcat.jni.Local;
+import org.hdcd.common.security.domain.CustomUser;
 import org.hdcd.domain.Item;
+import org.hdcd.domain.Member;
 import org.hdcd.service.ItemService;
+import org.hdcd.service.MemberService;
+import org.hdcd.service.UserItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.MessageSource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
@@ -31,6 +39,15 @@ public class ItemController {
 
     @Autowired
     private ItemService itemService;
+
+    @Autowired
+    private MemberService memberService;
+
+    @Autowired
+    private UserItemService userItemService;
+
+    @Autowired
+    private MessageSource messageSource;
 
     @Value("${upload.path}")
     private String uploadPath;
@@ -225,4 +242,28 @@ public class ItemController {
         return entity;
     }
 
+    @RequestMapping(value = "/buy", method = RequestMethod.POST)
+    public String buy(Integer itemId, RedirectAttributes rttr, Authentication authentication) throws Exception{
+        CustomUser customUser = (CustomUser)authentication.getPrincipal();
+        Member member = customUser.getMember();
+
+        int userNo = member.getUserNo();
+
+        member.setCoin(memberService.getCoin(userNo));
+
+        Item item = itemService.read(itemId);
+
+        userItemService.register(member, item);
+
+        String message = messageSource.getMessage("item.purchaseComplete", null, Locale.KOREAN);
+        rttr.addFlashAttribute("msg", message);
+
+        return "redirect:/item/success";
+
+    }
+
+    @RequestMapping(value = "/success", method = RequestMethod.GET)
+    public String success() throws Exception{
+        return "item/success";
+    }
 }

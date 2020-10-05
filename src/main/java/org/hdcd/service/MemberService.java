@@ -19,4 +19,6 @@ public interface MemberService {
     public int countAll() throws Exception;
 
     public void setupAdmin(Member member) throws Exception;
+
+    public int getCoin(int userNo) throws Exception;
 }

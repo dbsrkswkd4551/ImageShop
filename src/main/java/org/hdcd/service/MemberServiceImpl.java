@@ -95,4 +95,11 @@ public class MemberServiceImpl implements MemberService{
         mapper.createAuth(memberAuth);
     }
 
+    @Override
+    public int getCoin(int userNo) throws Exception {
+        Member member = mapper.read(userNo);
+
+        return member.getCoin();
+    }
+
 }

@@ -72,4 +72,15 @@ public class CoinController {
         model.addAttribute("list", service.list(userNo));
     }
 
+    @RequestMapping(value = "/listPay", method = RequestMethod.GET)
+    @PreAuthorize("hasRole('ROLE_MEMBER')")
+    public void listPayHistory(Model model, Authentication authentication) throws Exception{
+        CustomUser customUser = (CustomUser)authentication.getPrincipal();
+        Member member = customUser.getMember();
+
+        int userNo = member.getUserNo();
+
+        model.addAttribute("list", service.listPayHistory(userNo));
+    }
+
 }

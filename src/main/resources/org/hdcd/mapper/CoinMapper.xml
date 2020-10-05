@@ -38,6 +38,41 @@
 	 	]]>
 	</select>
 
+	<update id="pay">
+		UPDATE member
+		SET coin = (coin - #{amount}), upd_date = now()
+		WHERE user_no = #{userNo}
+	</update>
 
+	<insert id="createPayHistory">
+		INSERT INTO pay_coin_history
+			(
+				user_no,
+				item_id,
+				amount
+			)
+		VALUES
+			(
+				#{userNo},
+				#{itemId},
+				#{amount}
+			)
+
+	</insert>
+
+	<select id="listPayHistory" resultType="PayCoin">
+		<![CDATA[
+		SELECT a.history_no,
+		a.user_no,
+		a.item_id,
+		b.item_name,
+		a.amount,
+		a.reg_date
+		FROM pay_coin_history a INNER JOIN item b ON a.item_id = b.item_id
+		WHERE a.history_no > 0
+		AND user_no = #{userNo}
+		ORDER BY a.history_no DESC
+		]]>
+	</select>
 
 </mapper>
