@@ -13,7 +13,7 @@
 
 <table border="1">
     <tr>
-        <th align="center" width="80"><spring:message code="notice.no" /></th>
+        <th align="center" width="80"><spring:message code="notice.no"  /></th>
         <th align="center" width="320"><spring:message code="notice.title" /></th>
         <th align="center" width="180"><spring:message code="notice.regdate" /></th>
     </tr>

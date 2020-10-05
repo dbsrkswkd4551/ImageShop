@@ -11,7 +11,7 @@
                 <td width="120"><a href="/board/list"><spring:message code="menu.board.member" /></a></td>
                 <td width="120"><a href="/notice/list"><spring:message code="menu.notice.member" /></a></td>
                 <td width="120"><a href="/item/list"><spring:message code="menu.item.member" /></a></td>
-
+                <td width="120"><a href="/pds/list"><spring:message code="menu.pds.member"/></a> </td>
             </sec:authorize>
 
             <sec:authorize access="isAuthenticated()">
@@ -23,6 +23,7 @@
                     <td width="120"><a href="/board/list"><spring:message code="menu.board.admin" /></a></td>
                     <td width="120"><a href="/notice/list"><spring:message code="menu.notice.admin" /></a></td>
                     <td width="120"><a href="/item/list"><spring:message code="menu.item.member" /></a></td>
+                    <td width="120"><a href="/pds/list"><spring:message code="menu.pds.admin"/></a> </td>
                 </sec:authorize>
 
                 <sec:authorize access="hasRole('ROLE_MEMBER')">
@@ -33,6 +34,7 @@
                     <td width="120"><a href="/coin/list"><spring:message code="menu.coin.list" /></a></td>
                     <td width="120"><a href="/useritem/list"><spring:message code="menu.useritem.list" /></a></td>
                     <td width="120"><a href="/coin/listPay"><spring:message code="menu.coin.listPay" /></a></td>
+                    <td width="120"><a href="/pds/list"><spring:message code="menu.pds.member"/></a> </td>
                 </sec:authorize>
 
             </sec:authorize>

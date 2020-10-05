@@ -17,7 +17,7 @@
 <tiles:insertAttribute name="menu" />
 
 <div align="center">
-    <!-- home.jsp -->
+    <!-- tiles.xml에서 name= content를 가져온다 -->
 <tiles:insertAttribute name="content" />
 </div>
 

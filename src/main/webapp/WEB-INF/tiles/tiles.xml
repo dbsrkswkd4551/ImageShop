@@ -76,5 +76,11 @@
         <put-attribute name="content" value="/WEB-INF/views/useritem/{1}.jsp" />
     </definition>
 
+    <!-- 자료실 페이지에 대한 레이아웃 -->
+    <definition name="pds/*" extends="main-template">
+        <put-attribute name="title" value="pds" />
+        <put-attribute name="content" value="/WEB-INF/views/pds/{1}.jsp" />
+    </definition>
+
 
 </tiles-definitions>
