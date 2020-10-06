@@ -11,6 +11,13 @@
         <put-attribute name="footer" value="/WEB-INF/tiles/components/main/footer.jsp" />
     </definition>
 
+    <definition name="scc-template" template="/WEB-INF/tiles/layouts/scc_template.jsp">
+        <put-attribute name="title2" value="Main" />
+        <put-attribute name="header" value="/WEB-INF/tiles/components/main/header.jsp" />
+        <put-attribute name="menu" value="/WEB-INF/tiles/components/main/menu.jsp" />
+        <put-attribute name="footer" value="/WEB-INF/tiles/components/main/footer.jsp" />
+    </definition>
+
     <!-- 부모 레이아웃을 상속 받는다 -->
     <definition name="home" extends="main-template">
         <put-attribute name="title" value="Home" />
@@ -53,9 +60,14 @@
     </definition>
 
     <!-- 요양원 페이지에 대한 레이아웃 -->
-    <definition name="scc/*" extends="main-template">
+    <definition name="scc/list" extends="main-template">
         <put-attribute name="title" value="scc" />
-        <put-attribute name="content" value="/WEB-INF/views/scc/{1}.jsp" />
+        <put-attribute name="content" value="/WEB-INF/views/scc/list.jsp" />
+    </definition>
+
+    <definition name="scc/read" extends="scc-template">
+        <put-attribute name="title" value="scc" />
+        <put-attribute name="content" value="/WEB-INF/views/scc/read.jsp" />
     </definition>
 
 </tiles-definitions>
