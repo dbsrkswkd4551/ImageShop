@@ -9,8 +9,6 @@
 </head>
 <body>
 
-<c:forEach var="scc_info">
-
     <p>${scc_info.SCCNAME}( ${scc_info.SCCGRADE} )</p><button><a href="${scc_info.DETAILINFO}" target="_blank">상세정보</a></button>
 
     <p>${scc_info.SCCADDRESS}</p>
@@ -75,7 +73,6 @@
     });
 </script>
 
-</c:forEach>
 
 </body>
 </html>

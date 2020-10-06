@@ -17,7 +17,7 @@
 <tiles:insertAttribute name="menu" />
 
 <div align="center">
-    <!-- home.jsp -->
+    <!-- .jsp -->
     <tiles:insertAttribute name="content" />
 </div>
 
