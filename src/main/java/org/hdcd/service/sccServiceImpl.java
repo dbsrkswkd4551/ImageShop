@@ -23,4 +23,9 @@ public class sccServiceImpl implements sccService{
     public int count(PageRequest pageRequest) throws Exception{
         return mapper.count(pageRequest);
     }
+
+    @Override
+    public scc_info read(int SCC_NUM) throws Exception{
+        return mapper.read(SCC_NUM);
+    }
 }

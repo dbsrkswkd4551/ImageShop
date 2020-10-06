@@ -3,6 +3,7 @@ package org.hdcd.controller;
 import org.hdcd.common.domain.CodeLabelValue;
 import org.hdcd.common.domain.PageRequest;
 import org.hdcd.common.domain.Pagination;
+import org.hdcd.domain.scc_info;
 import org.hdcd.service.sccService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -34,10 +35,19 @@ public class sccController {
 
         List<CodeLabelValue> searchTypeCodeValueList = new ArrayList<CodeLabelValue>();
         searchTypeCodeValueList.add(new CodeLabelValue("n", "---"));
-        searchTypeCodeValueList.add(new CodeLabelValue("t", "Name"));
-        searchTypeCodeValueList.add(new CodeLabelValue("d", "District"));
+        searchTypeCodeValueList.add(new CodeLabelValue("t", "시설명"));
+        searchTypeCodeValueList.add(new CodeLabelValue("d", "지역구"));
 
         model.addAttribute("searchTypeCodeValueList", searchTypeCodeValueList);
+    }
+
+    @RequestMapping(value = "/read", method = RequestMethod.GET)
+    public String read(Integer SCC_NUM, Model model) throws Exception{
+        scc_info scc_info = service.read(SCC_NUM);
+
+        model.addAttribute(scc_info);
+
+        return "scc/read";
     }
 
 

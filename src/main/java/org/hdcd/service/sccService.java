@@ -9,4 +9,6 @@ public interface sccService {
     public List<scc_info> list(PageRequest pageRequest) throws Exception;
 
     public int count(PageRequest pageRequest) throws  Exception;
+
+    public scc_info read(int SCC_NUM) throws Exception;
 }

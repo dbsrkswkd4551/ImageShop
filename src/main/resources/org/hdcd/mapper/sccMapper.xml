@@ -15,9 +15,10 @@
 			</if>
 		</if>
 	</sql>
+
     <select id="list" resultType="scc_info">
 		<![CDATA[
-	 	SELECT *
+	 	SELECT SCC_NUM, SCC_TYPE, SCC_NAME, SCC_DISTRICT
 	 	  FROM scc_info
 	 	 WHERE SCC_NUM > 0
 	 	 ]]>
@@ -36,6 +37,15 @@
 		 WHERE SCC_NUM > 0
 		]]>
 		<include refid="search"></include>
+	</select>
+
+	<!-- SCC_NUM = #{SCC_NUM} -->
+	<select id="read" resultType="scc_info">
+		<![CDATA[
+		SELECT *
+		FROM scc_info
+		WHERE SCC_NUM = #{SCC_NUM}
+		]]>
 	</select>
 
 </mapper>

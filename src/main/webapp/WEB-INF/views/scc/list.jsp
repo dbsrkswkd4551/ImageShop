@@ -16,36 +16,18 @@
 <table border="1">
     <tr>
         <th align="center" width="40">번호</th>
-        <th align="center" width="200">타입</th>
-        <th align="center" width="200">등급</th>
-        <th align="center" width="300">시설명</th>
-        <th align="center" width="40">총원</th>
-        <th align="center" width="40">현재원</th>
-        <th align="center" width="50">여유인원</th>
-        <th align="center" width="50">대기인원</th>
-        <th align="center" width="150">전화</th>
+        <th align="center" width="300">타입</th>
+        <th align="center" width="500">시설명</th>
         <th align="center" width="80">지역구</th>
-        <th align="center" width="250">주소</th>
-        <th align="center" width="50">상세정보</th>
     </tr>
     <c:forEach items="${list}" var="scc_info">
         <tr>
             <td align="center">${scc_info.SCCNUM}</td>
-            <td align="left">${scc_info.SCCTYPE}</td>
-            <td align="center">${scc_info.SCCGRADE}</td>
-            <td align="center">${scc_info.SCCNAME}</td>
-            <td align="center">${scc_info.TOTALNUM}</td>
-            <td align="center">${scc_info.STATENUM}</td>
-            <td align="center">${scc_info.REMAINEDNUM}</td>
-            <td align="center">${scc_info.WAITINGNUM}</td>
-            <td align="center">${scc_info.SCCPHONE}</td>
+            <td align="center">${scc_info.SCCTYPE}</td>
+            <td align="center"><a href="read?SCC_NUM=${scc_info.SCCNUM}">${scc_info.SCCNAME}</a></td>
             <td align="center">${scc_info.SCCDISTRICT}</td>
-            <td align="center">${scc_info.SCCADDRESS}</td>
-            <td align="center"><a href="${scc_info.DETAILINFO}" target="_blank"/>Link</td>
         </tr>
     </c:forEach>
-
-
 </table>
 
 <div>

@@ -1,49 +1,32 @@
-<%@ page contentType="text/html;charset=UTF-8"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
-<form:form modelAttribute="scc_info">
-    <form:hidden path="SCCNUM" />
 
-    <input type="hidden" name="page" value="${pgn.page}">
-    <input type="hidden" name="sizePerPage" value="${pgn.sizePerPage}">
-
-    <table>
+<c:forEach var="scc_info">
+    <br>
+    <p>${scc_info.SCCNAME}( ${scc_info.SCCGRADE} )</p>
+    </br>
+    <p>${scc_info.SCCADDRESS}</p>
+    </br>
+    <p>${scc_info.SCCPHONE}</p>
+    </br>
+    <table border="1">
         <tr>
-            <td><spring:message code="board.title" /></td>
-            <td><form:input path="title" readonly="true" /></td>
-            <td><font color="red"><form:errors path="title" /></font></td>
+            <th align="center" width="50">정원</th>
+            <th align="center" width="50">현원</th>
+            <th align="center" width="50">잔여</th>
+            <th align="center" width="50">대기</th>
         </tr>
         <tr>
-            <td><spring:message code="board.writer" /></td>
-            <td><form:input path="writer" readonly="true" /></td>
-            <td><font color="red"><form:errors path="writer" /></font></td>
-        </tr>
-        <tr>
-            <td><spring:message code="board.content" /></td>
-            <td><form:textarea path="content" readonly="true" /></td>
-            <td><font color="red"><form:errors path="content" /></font></td>
+            <td align="center">${scc_info.TOTALNUM}</td>
+            <td align="center">${scc_info.STATENUM}</td>
+            <td align="center">${scc_info.REMAINEDNUM}</td>
+            <td align="center">${scc_info.WAITINGNUM}</td>
         </tr>
     </table>
-</form:form>
-
-
-<script type="text/javascript"
-
-        src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-
-<script type="text/javascript">
-    $(document).ready(function() {
-
-        var formObj = $("#scc_info");
-
-        var pageObj = $('#page');
-        var sizePerPageObj = $('#sizePerPage');
-        var pageVal = pageObj.val();
-        var sizePerPageVal = sizePerPageObj.val();
-
-
-    });
-</script>
+    <div>
+        <a href="${scc_info.DETAILINFO}" target="_blank"/>상세정보
+    </div>
+</c:forEach>
