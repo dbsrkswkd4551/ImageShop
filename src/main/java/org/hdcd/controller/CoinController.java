@@ -83,4 +83,10 @@ public class CoinController {
         model.addAttribute("list", service.listPayHistory(userNo));
     }
 
+    @RequestMapping(value = "/notEnoughCoin", method = RequestMethod.GET)
+    @PreAuthorize("hasRole('ROLE_MEMBER')")
+    public void notEnoughCoin(Model model) throws Exception{
+
+    }
+
 }

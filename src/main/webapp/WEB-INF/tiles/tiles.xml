@@ -82,5 +82,11 @@
         <put-attribute name="content" value="/WEB-INF/views/pds/{1}.jsp" />
     </definition>
 
+    <!-- 에러 페이지 레이아웃 -->
+    <definition name="error/*" extends="common-template">
+        <put-attribute name="title" value="Error" />
+        <put-attribute name="content" value="/WEB-INF/views/error/{1}.jsp" />
+    </definition>
+
 
 </tiles-definitions>
