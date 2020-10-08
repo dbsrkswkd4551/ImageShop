@@ -7,12 +7,13 @@ public class PageRequest {
 
     private int page;
     private int sizePerPage;
+    //page~sizePerPape 만큼의 게시물 표시, 1~10까지 10개 게시물이 한 페이지에 표시된다
 
     private String searchType;
     private String keyword;
+    //컨트롤러에서 addAttribute에 의해 뷰로 보내진다
 
-
-    public PageRequest() {
+   public PageRequest() {
         this.page = 1;
         this.sizePerPage = 10;
     }
@@ -90,7 +91,7 @@ public class PageRequest {
                 .queryParam("page", page)
                 .queryParam("size", this.sizePerPage)
                 .build();
-
+        //
         return uriComponents.toUriString();
     }
 }

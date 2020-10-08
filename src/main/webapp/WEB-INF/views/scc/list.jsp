@@ -20,9 +20,9 @@
         <th align="center" width="500">시설명</th>
         <th align="center" width="80">지역구</th>
     </tr>
-    <c:forEach items="${list}" var="scc_info">
+    <c:forEach items="${list}" var="scc_info" varStatus="status">
         <tr>
-            <td align="center">${scc_info.SCCNUM}</td>
+            <td align="center">${pagination.totalCount- ((pageRequest.page - 1) * pagination.displayPageNum + status.index)}</td>
             <td align="center">${scc_info.SCCTYPE}</td>
             <td align="center"><a href="read?SCC_NUM=${scc_info.SCCNUM}">${scc_info.SCCNAME}</a></td>
             <td align="center">${scc_info.SCCDISTRICT}</td>

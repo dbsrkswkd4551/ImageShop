@@ -70,4 +70,12 @@
         <put-attribute name="content" value="/WEB-INF/views/scc/read.jsp" />
     </definition>
 
+    <!-- 공지사항 레이아웃 -->
+    <definition name="notice/*" extends="main-template">
+        <put-attribute name="title" value="Notice" />
+        <put-attribute name="content" value="/WEB-INF/views/notice/{1}.jsp" />
+    </definition>
+
+
+
 </tiles-definitions>
