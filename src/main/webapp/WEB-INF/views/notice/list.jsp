@@ -35,7 +35,7 @@
         <c:otherwise>
             <c:forEach items="${list}" var="board" varStatus="status">
                 <tr>
-                    <td align="center">${pagination.totalCount- ((pageRequest.page - 1) * pagination.displayPageNum + status.index)}</td>
+                    <td align="center">${pagination.totalCount - ((pageRequest.page - 1) * pagination.displayPageNum + status.index)}</td>
                     <td align="left"><a href="/notice/read${pgrq.toUriString(pgrq.page)}&boardNo=${board.boardNo}"><c:out value="${board.title}" /></a></td>
                     <td align="center"><fmt:formatDate pattern="yyyy-MM-dd hh:mm" value="${board.regDate}" timeZone="Etc/GMT+12"/></td>
                 </tr>

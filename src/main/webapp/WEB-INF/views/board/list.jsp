@@ -37,7 +37,7 @@
 
             <c:forEach items="${list}" var="board" varStatus="status">
                 <tr>
-                    <td align="center">${status.count}</td>
+                    <td align="center">${pagination.totalCount - ((pgrq.page - 1) * pagination.displayPageNum + status.index)}</td>
                     <td align="left"><a href="/board/read${pgrq.toUriString(pgrq.page)}&boardNo=${board.boardNo}"><c:out value="${board.title}" /></a></td>
                     <td align="right">${board.writer}</td>
                     <td align="center"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${board.regDate}" /></td>

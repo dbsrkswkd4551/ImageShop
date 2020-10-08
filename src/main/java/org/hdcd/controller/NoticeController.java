@@ -25,6 +25,7 @@ public class NoticeController {
     @Autowired
     private BoardService service;
 
+
     @RequestMapping(value = "/register", method = RequestMethod.GET)
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public void registerForm(Model model) throws Exception {

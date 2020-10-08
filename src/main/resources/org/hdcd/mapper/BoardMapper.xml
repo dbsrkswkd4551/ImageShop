@@ -108,6 +108,7 @@
 	 		   content,
 	 		   writer,
 	 		   reg_date
+
 	 	  FROM board
 	 	 WHERE board_no > 0 AND board_type = 2
 		]]>
@@ -125,7 +126,7 @@
 		<![CDATA[
 	 	SELECT count(board_no)
 		  FROM board
-		 WHERE board_no > 0
+		 WHERE board_no > 0 AND board_type = 2
 		]]>
 
 		<include refid="search"></include>
@@ -154,7 +155,7 @@
 		<![CDATA[
 	 	SELECT count(board_no)
 		  FROM board
-		 WHERE board_no > 0
+		 WHERE board_no > 0 AND board_type = 1
 		]]>
 
 		<include refid="searchN"></include>
