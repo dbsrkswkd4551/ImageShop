@@ -35,6 +35,7 @@
 <script type="text/javascript">
     $(document).ready(function (){
         var formObj = $("#board");
+
         $("#btnRegister").on("click", function () {
             formObj.submit();
         });

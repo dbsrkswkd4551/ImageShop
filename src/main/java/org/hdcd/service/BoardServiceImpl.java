@@ -20,11 +20,6 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
-    public void registerN(Board board) throws Exception {
-        mapper.createN(board);
-    }
-
-    @Override
     public Board read(Integer boardNo) throws Exception {
         return mapper.read(boardNo);
     }
@@ -49,14 +44,5 @@ public class BoardServiceImpl implements BoardService {
         return mapper.count(pageRequest);
     }
 
-    @Override
-    public List<Board> listN(PageRequest pageRequest) throws Exception {
-        return mapper.listN(pageRequest);
-    }
-
-    @Override
-    public int countN(PageRequest pageRequest) throws Exception{
-        return mapper.countN(pageRequest);
-    }
 
 }

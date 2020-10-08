@@ -9,8 +9,6 @@ public interface BoardMapper {
 
     public void create(Board board) throws Exception;
 
-    public void createN(Board board) throws Exception;
-
     public Board read(Integer boardNo) throws Exception;
 
     public void update(Board board) throws Exception;
@@ -21,8 +19,5 @@ public interface BoardMapper {
 
     public int count(PageRequest pageRequest) throws Exception;
 
-    public List<Board> listN(PageRequest pageRequest) throws Exception;
-
-    public int countN(PageRequest pageRequest) throws Exception;
 
 }

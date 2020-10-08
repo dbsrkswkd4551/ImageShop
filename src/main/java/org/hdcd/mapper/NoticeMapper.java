@@ -1,17 +1,21 @@
 package org.hdcd.mapper;
 
+import org.hdcd.common.domain.PageRequest;
+import org.hdcd.domain.Board;
 import org.hdcd.domain.Notice;
 
 import java.util.List;
 
 public interface NoticeMapper {
-    public void create(Notice notice) throws Exception;
+    public void create(Board board) throws Exception;
 
-    public Notice read(Integer noticeNo) throws Exception;
+    public Board read(Integer boardNo) throws Exception;
 
-    public void update(Notice notice) throws Exception;
+    public void update(Board board) throws Exception;
 
-    public void delete(Integer noticeNo) throws Exception;
+    public void delete(Integer boardNo) throws Exception;
 
-    public List<Notice> list() throws Exception;
+    public List<Board> list(PageRequest pageRequest) throws Exception;
+
+    public int count(PageRequest pageRequest) throws Exception;
 }

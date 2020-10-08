@@ -5,7 +5,7 @@
 
 <h2><spring:message code="notice.header.modify" /></h2>
 
-<form:form modelAttribute="notice" action="modify">
+<form:form modelAttribute="board" action="modify">
     <form:hidden path="boardNo" />
 
     <input type="hidden" name="page" value="${pgrq.page}">

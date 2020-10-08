@@ -1,6 +1,7 @@
 package org.hdcd.service;
 
 import org.hdcd.common.domain.PageRequest;
+import org.hdcd.domain.Board;
 import org.hdcd.domain.Notice;
 import org.hdcd.mapper.NoticeMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,29 +15,33 @@ public class NoticeServiceImpl implements NoticeService{
     private NoticeMapper mapper;
 
     @Override
-    public void register(Notice notice) throws Exception{
-        mapper.create(notice);
+    public void register(Board board) throws Exception{
+        mapper.create(board);
     }
 
     @Override
-    public Notice read(Integer noticeNo) throws Exception{
-        return mapper.read(noticeNo);
+    public Board read(Integer boardNo) throws Exception{
+        return mapper.read(boardNo);
     }
 
     @Override
-    public void modify(Notice notice) throws Exception {
-        mapper.update(notice);
+    public void modify(Board board) throws Exception {
+        mapper.update(board);
     }
 
     @Override
-    public void remove(Integer noticeNo) throws Exception {
-        mapper.delete(noticeNo);
+    public void remove(Integer boardNo) throws Exception {
+        mapper.delete(boardNo);
     }
 
     @Override
-    public List<Notice> list() throws Exception {
-        return mapper.list();
+    public List<Board> list(PageRequest pageRequest) throws Exception {
+        return mapper.list(pageRequest);
     }
 
+    @Override
+    public int count(PageRequest pageRequest) throws Exception{
+        return mapper.count(pageRequest);
+    }
 
 }

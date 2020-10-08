@@ -22,9 +22,9 @@ import java.util.List;
 @Controller
 @RequestMapping("/notice")
 public class NoticeController {
-    @Autowired
-    private BoardService service;
 
+    @Autowired
+    private NoticeService service;
 
     @RequestMapping(value = "/register", method = RequestMethod.GET)
     @PreAuthorize("hasRole('ROLE_ADMIN')")
@@ -37,7 +37,7 @@ public class NoticeController {
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public String register(Board board, RedirectAttributes rttr) throws Exception {
-        service.registerN(board);
+        service.register(board);
 
         rttr.addFlashAttribute("msg", "SUCCESS");
         return "redirect:/notice/list";
@@ -45,16 +45,16 @@ public class NoticeController {
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public void list(@ModelAttribute("pgrq") PageRequest pageRequest, Model model) throws Exception {
-        model.addAttribute("list", service.listN(pageRequest));
+        model.addAttribute("list", service.list(pageRequest));
 
         Pagination pagination = new Pagination();
         pagination.setPageRequest(pageRequest);
 
-        pagination.setTotalCount(service.countN(pageRequest));
+        pagination.setTotalCount(service.count(pageRequest));
 
 
-        //model.addAttribute("pagination", pagination);
-        //model.addAttribute("pageRequest", pageRequest);
+        model.addAttribute("pagination", pagination);
+        model.addAttribute("pageRequest", pageRequest);
 
         List<CodeLabelValue> searchTypeCodeValueList = new ArrayList<CodeLabelValue>();
         searchTypeCodeValueList.add(new CodeLabelValue("n", "---"));
@@ -67,7 +67,9 @@ public class NoticeController {
 
     @RequestMapping(value = "/read", method = RequestMethod.GET)
     public void read(int boardNo, @ModelAttribute("pgrq") PageRequest pageRequest, Model model) throws Exception {
-        model.addAttribute(service.read(boardNo));
+        Board board = service.read(boardNo);
+
+        model.addAttribute(board);
     }
 
     @RequestMapping(value = "/remove", method = RequestMethod.POST)
@@ -88,7 +90,9 @@ public class NoticeController {
     @RequestMapping(value = "/modify", method = RequestMethod.GET)
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public void modifyForm(int boardNo, @ModelAttribute("pgrq") PageRequest pageRequest, Model model) throws Exception {
-        model.addAttribute(service.read(boardNo));
+        Board board = service.read(boardNo);
+
+        model.addAttribute(board);
     }
 
     @RequestMapping(value = "/modify", method = RequestMethod.POST)

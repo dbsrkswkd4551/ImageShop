@@ -9,8 +9,6 @@ public interface BoardService {
 
     public void register(Board board) throws Exception;
 
-    public void registerN(Board board) throws Exception;
-
     public Board read(Integer boardNo) throws Exception;
 
     public void modify(Board board) throws Exception;
@@ -21,9 +19,6 @@ public interface BoardService {
 
     public int count(PageRequest pageRequest) throws  Exception;
 
-    public List<Board> listN(PageRequest pageRequest) throws Exception;
-
-    public int countN(PageRequest pageRequest) throws  Exception;
 
 
 }
