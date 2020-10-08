@@ -24,6 +24,8 @@ public class CustomLoginSuccessHandler extends SavedRequestAwareAuthenticationSu
 
         log.info("Userid = " + member.getUserId());
 
+
+
         super.onAuthenticationSuccess(request, response, authentication);
     }
 

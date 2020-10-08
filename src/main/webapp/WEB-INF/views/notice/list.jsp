@@ -35,7 +35,7 @@
         <c:otherwise>
             <c:forEach items="${list}" var="board" varStatus="status">
                 <tr>
-                    <td align="center">${pagination.totalCount - ((pageRequest.page - 1) * pagination.displayPageNum + status.index)}</td>
+                    <td align="center">${pagination2.totalCount - ((pageRequest2.page - 1) * pagination2.displayPageNum + status.index)}</td>
                     <td align="left"><a href="/notice/read${pgrq.toUriString(pgrq.page)}&boardNo=${board.boardNo}"><c:out value="${board.title}" /></a></td>
                     <td align="center"><fmt:formatDate pattern="yyyy-MM-dd hh:mm" value="${board.regDate}" timeZone="Etc/GMT+12"/></td>
                 </tr>
@@ -45,16 +45,16 @@
 </table>
 
 <div>
-    <c:if test="${pagination.prev}">
-        <a href="${pagination.startPage - 1}">&laquo;</a>
+    <c:if test="${pagination2.prev}">
+        <a href="${pageRequest2.toUriString(pagination2.startPage-1)}">&laquo;</a>
     </c:if>
 
-    <c:forEach begin="${pagination.startPage }" end="${pagination.endPage }" var="idx">
-        <a href="/board/list${pagination.makeQuery(idx)}">${idx}</a>
+    <c:forEach begin="${pagination2.startPage }" end="${pagination2.endPage }" var="idx">
+        <a href="/notice/list${pagination2.toUriString(idx)}">${idx}</a>
     </c:forEach>
 
-    <c:if test="${pagination.next && pagination.endPage > 0}">
-        <a href="${pagination.endPage +1}">&raquo;</a>
+    <c:if test="${pagination2.next && pagination2.endPage > 0}">
+        <a href="${pageRequest2.toUriString(pagination2.endPage+1)}">&raquo;</a>
     </c:if>
 </div>
 

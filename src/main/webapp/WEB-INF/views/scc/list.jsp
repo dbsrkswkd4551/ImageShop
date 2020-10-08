@@ -31,17 +31,17 @@
 </table>
 
 <div>
-    <c:if test="${pagination.prev}">
-        <a href="/scc/list?page=${pagination.startPage-1}&perPageNum=10">&laquo;</a>
-    </c:if>
+        <c:if test="${pagination.prev}">
+            <a href="/scc/list${pageRequest.toUriString(pagination.startPage-1)}&perPageNum=10">&laquo;</a>
+        </c:if>
 
-    <c:forEach begin="${pagination.startPage}" end="${pagination.endPage}" var="idx">
-        <a href="/scc/list${pagination.makeQuery(idx)}">${idx}</a>
-    </c:forEach>
+        <c:forEach begin="${pagination.startPage}" end="${pagination.endPage}" var="idx">
+            <a href="/scc/list${pageRequest.toUriString(idx)}">${idx}</a>
+        </c:forEach>
 
-    <c:if test="${pagination.next && pagination.endPage > 0}">
-        <a href="/scc/list?page=${pagination.endPage + 1}&perPageNum=10">&raquo;</a>
-    </c:if>
+        <c:if test="${pagination.next && pagination.endPage > 0}">
+            <a href="/scc/list${pageRequest.toUriString(pagination.endPage+1)}&perPageNum=10">&raquo;</a>
+        </c:if>
 </div>
 
 <script type="text/javascript"

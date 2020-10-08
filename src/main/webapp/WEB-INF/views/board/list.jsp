@@ -51,17 +51,17 @@
     <!-- startPage가 1일 경우 false 이므로 이전 페이지로 돌아가는 << 기호 출력안함 -->
     <!-- startPage가 11, 21,.... 일 경우 << 기호를 누르면 n-1 페이지로 돌아간다 -->
     <c:if test="${pagination.prev}">
-        <a href="${pagination.startPage - 1}">&laquo;</a>
+        <a href="${pageRequest.toUriString(pagination.startPage-1)}">&laquo;</a>
     </c:if>
 
     <!-- 1~10페이지 까지 출력 c:forEach var=n begin=a end= b => a~b까지 n을 증가 시킨다(like for문)-->
     <c:forEach begin="${pagination.startPage }" end="${pagination.endPage }" var="idx">
-        <a href="/board/list${pagination.makeQuery(idx)}">${idx}</a>
+        <a href="/board/list${pageRequest.toUriString(idx)}">${idx}</a>
     </c:forEach>
 
     <!-- endPage가 0이상, 게시글의 총 숫자가 endPage * 10보다 클 경우 >> 기호 클릭 시 다음 페이지로 넘어간다 -->
     <c:if test="${pagination.next && pagination.endPage > 0}">
-        <a href="${pagination.endPage +1}">&raquo;</a>
+        <a href="${pageRequest.toUriString(pagination.endPage+1)}">&raquo;</a>
     </c:if>
 </div>
 

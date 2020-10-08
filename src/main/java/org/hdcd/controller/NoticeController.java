@@ -53,9 +53,8 @@ public class NoticeController {
         pagination.setTotalCount(service.countN(pageRequest));
 
 
-        model.addAttribute("pagination", pagination);
-
-        model.addAttribute("pageRequest", pageRequest);
+        //model.addAttribute("pagination", pagination);
+        //model.addAttribute("pageRequest", pageRequest);
 
         List<CodeLabelValue> searchTypeCodeValueList = new ArrayList<CodeLabelValue>();
         searchTypeCodeValueList.add(new CodeLabelValue("n", "---"));

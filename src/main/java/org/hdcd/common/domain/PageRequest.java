@@ -92,6 +92,7 @@ public class PageRequest {
                 .queryParam("size", this.sizePerPage)
                 .build();
         //
+
         return uriComponents.toUriString();
     }
 }
