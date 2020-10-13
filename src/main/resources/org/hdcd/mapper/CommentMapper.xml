@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.hdcd.mapper.CommentMapper">
+
+	<select id="commentCount" resultType="int">
+		SELECT COUNT(*)
+		FROM comment
+	</select>
+
+	<select id="commentList" resultType="Comment">
+		SELECT *
+		FROM comment
+	</select>
+
+	<insert id="commentInsert" parameterType="Comment">
+		INSERT INTO comment
+		(
+			comment_id,
+			board_no,
+			content,
+			wrtier,
+			reg_date
+		)
+		VALUES
+		(
+			#{commentId},
+			#{boardNo},
+			#{content},
+			#{writer},
+			now()
+		)
+	</insert>
+
+	<update id="commentUpdate" parameterType="Comment">
+		UPDATE comment
+		SET content = #{content}
+		WHERE comment_id = #{commentId}
+	</update>
+
+	<delete id="commentDelete" parameterType="int">
+		DELETE
+		FROM comment
+		WHERE comment_id = #{commentId}
+	</delete>
+
+
+
+
+</mapper>

@@ -15,7 +15,7 @@
 
 <table border="1">
     <tr>
-        <th align="center" width="40">번호</th>
+        <th align="center" width="40" scope="col">번호</th>
         <th align="center" width="300">타입</th>
         <th align="center" width="500">시설명</th>
         <th align="center" width="80">지역구</th>

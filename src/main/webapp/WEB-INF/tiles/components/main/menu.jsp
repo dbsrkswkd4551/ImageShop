@@ -9,8 +9,8 @@
 
             <!-- 로그인을 하지 않은 경우 true -->
             <sec:authorize access="!isAuthenticated()">
-                <td width="120"><a href="/board/list"><spring:message code="menu.board.member" /></a></td>
                 <td width="120"><a href="/notice/list"><spring:message code="menu.notice.member"/></a></td>
+                <td width="120"><a href="/faq/list">자주하는질문</a></td>
                 <td width="120"><a href="/scc/list"><spring:message code="menu.board.scc" /></a></td>
             </sec:authorize>
 
@@ -23,6 +23,7 @@
             <td width="120"><a href="/user/list"><spring:message code="menu.user.admin" /></a></td>
             <td width="120"><a href="/board/list"><spring:message code="menu.board.member" /></a></td>
             <td width="120"><a href="/notice/list"><spring:message code="menu.notice.member" /></a></td>
+            <td width="120"><a href="/faq/list">자주하는질문</a></td>
             <td width="120"><a href="/scc/list"><spring:message code="menu.board.scc" /></a></td>
                 </sec:authorize>
 
@@ -30,6 +31,7 @@
                 <sec:authorize access="hasRole('ROLE_MEMBER')">
                     <td width="120"><a href="/board/list"><spring:message code="menu.board.member" /></a></td>
                     <td width="120"><a href="/notice/list"><spring:message code="menu.notice.member" /></a></td>
+                    <td width="120"><a href="/faq/list">자주하는질문</a></td>
                     <td width="120"><a href="/scc/list"><spring:message code="menu.board.scc" /></a></td>
                 </sec:authorize>
 

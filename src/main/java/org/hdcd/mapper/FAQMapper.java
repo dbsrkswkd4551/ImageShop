@@ -1,13 +1,11 @@
 package org.hdcd.mapper;
 
-import java.util.List;
-
 import org.hdcd.common.domain.PageRequest;
 import org.hdcd.domain.Board;
-import org.hdcd.domain.Comment;
 
-public interface BoardMapper {
+import java.util.List;
 
+public interface FAQMapper {
     public void create(Board board) throws Exception;
 
     public Board read(Integer boardNo) throws Exception;
@@ -19,6 +17,4 @@ public interface BoardMapper {
     public List<Board> list(PageRequest pageRequest) throws Exception;
 
     public int count(PageRequest pageRequest) throws Exception;
-
-
 }

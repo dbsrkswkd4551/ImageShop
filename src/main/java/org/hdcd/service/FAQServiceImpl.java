@@ -1,27 +1,25 @@
 package org.hdcd.service;
 
-import java.util.List;
-
 import org.hdcd.common.domain.PageRequest;
 import org.hdcd.domain.Board;
-import org.hdcd.domain.Comment;
-import org.hdcd.mapper.BoardMapper;
+import org.hdcd.mapper.FAQMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-@Service
-public class BoardServiceImpl implements BoardService {
+import java.util.List;
 
+@Service
+public class FAQServiceImpl implements FAQService{
     @Autowired
-    private BoardMapper mapper;
+    private FAQMapper mapper;
 
     @Override
-    public void register(Board board) throws Exception {
+    public void register(Board board) throws Exception{
         mapper.create(board);
     }
 
     @Override
-    public Board read(Integer boardNo) throws Exception {
+    public Board read(Integer boardNo) throws Exception{
         return mapper.read(boardNo);
     }
 
@@ -44,8 +42,4 @@ public class BoardServiceImpl implements BoardService {
     public int count(PageRequest pageRequest) throws Exception{
         return mapper.count(pageRequest);
     }
-    
-    //댓글 처리
-
-
 }

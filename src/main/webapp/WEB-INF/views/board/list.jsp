@@ -21,9 +21,10 @@
 <table border="1">
     <tr>
         <th align="center" width="80"><spring:message code="board.no" /></th>
-        <th align="center" width="320"><spring:message code="board.title" /></th>
+        <th align="center" width="320">요양원명</th>
         <th align="center" width="100"><spring:message code="board.writer" /></th>
         <th align="center" width="180"><spring:message code="board.regdate" /></th>
+        <th align="center" width="100">평점</th>
     </tr>
     <c:choose>
         <c:when test="${empty list}">
@@ -40,7 +41,17 @@
                     <td align="center">${pagination.totalCount - ((pgrq.page - 1) * pagination.displayPageNum + status.index)}</td>
                     <td align="left"><a href="/board/read${pgrq.toUriString(pgrq.page)}&boardNo=${board.boardNo}"><c:out value="${board.title}" /></a></td>
                     <td align="right">${board.writer}</td>
-                    <td align="center"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${board.regDate}" /></td>
+                    <td align="center"><fmt:formatDate pattern="yy/MM/dd HH:mm" value="${board.regDate}" /></td>
+                    <td align="center">
+                        <c:choose>
+                            <c:when test="${board.rating eq 1}">★☆☆☆☆</c:when>
+                            <c:when test="${board.rating eq 2}">★★☆☆☆</c:when>
+                            <c:when test="${board.rating eq 3}">★★★☆☆</c:when>
+                            <c:when test="${board.rating eq 4}">★★★★☆</c:when>
+                            <c:when test="${board.rating eq 5}">★★★★★</c:when>
+                        </c:choose>
+                    </td>
+                    
                 </tr>
             </c:forEach>
         </c:otherwise>

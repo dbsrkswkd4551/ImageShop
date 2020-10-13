@@ -76,6 +76,12 @@
         <put-attribute name="content" value="/WEB-INF/views/notice/{1}.jsp" />
     </definition>
 
+    <!-- 자주하는 질문 레이아웃 -->
+    <definition name="faq/*" extends="main-template">
+        <put-attribute name="title" value="faq" />
+        <put-attribute name="content" value="/WEB-INF/views/faq/{1}.jsp" />
+    </definition>
+
 
 
 </tiles-definitions>

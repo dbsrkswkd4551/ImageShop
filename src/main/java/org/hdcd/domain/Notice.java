@@ -10,8 +10,11 @@ import java.util.Date;
 @Setter
 @ToString
 public class Notice {
+    /*
     private int noticeNo;
     private String title;
     private String content;
     private Date regDate;
+
+     */
 }

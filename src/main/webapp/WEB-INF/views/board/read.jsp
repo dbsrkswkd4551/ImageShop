@@ -30,6 +30,18 @@
             <td><form:textarea path="content" readonly="true" /></td>
             <td><font color="red"><form:errors path="content" /></font></td>
         </tr>
+        <tr>
+            <td>평점</td>
+            <td align="left">
+                <c:choose>
+                    <c:when test="${board.rating eq 1}">★☆☆☆☆</c:when>
+                    <c:when test="${board.rating eq 2}">★★☆☆☆</c:when>
+                    <c:when test="${board.rating eq 3}">★★★☆☆</c:when>
+                    <c:when test="${board.rating eq 4}">★★★★☆</c:when>
+                    <c:when test="${board.rating eq 5}">★★★★★</c:when>
+                </c:choose>
+            </td>
+        </tr>
     </table>
 </form:form>
 
@@ -57,31 +69,23 @@
 
 <script type="text/javascript">
     $(document).ready(function() {
-
         var formObj = $("#board");
-
         //1~10
         var pageObj = $("#page");
         var sizePerPageObj = $("#sizePerPage");
-
         var pageVal = pageObj.val();
         var sizePerPageVal = sizePerPageObj.val();
-
         $("#btnEdit").on("click", function() {
             var boardNo = $("#boardNo");
             var boardNoVal = boardNo.val();
-
             self.location = "/board/modify${pgrq.toUriString()}" + "&boardNo=" + boardNoVal;
         });
-
         $("#btnRemove").on("click", function() {
             formObj.attr("action", "/board/remove");
             formObj.submit();
         });
-
         $("#btnList").on("click", function() {
             self.location = "/board/list${pgrq.toUriString()}";
         });
-
     });
 </script>

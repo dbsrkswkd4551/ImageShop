@@ -1,14 +1,14 @@
 package org.hdcd.service;
 
-import java.util.List;
-
 import org.hdcd.common.domain.PageRequest;
 import org.hdcd.domain.Board;
-import org.hdcd.domain.Comment;
 
-public interface BoardService {
+import java.util.List;
 
+public interface FAQService {
     public void register(Board board) throws Exception;
+
+    public List<Board> list(PageRequest pageRequest) throws Exception;
 
     public Board read(Integer boardNo) throws Exception;
 
@@ -16,10 +16,5 @@ public interface BoardService {
 
     public void remove(Integer boardNo) throws Exception;
 
-    public List<Board> list(PageRequest pageRequest) throws Exception;
-
     public int count(PageRequest pageRequest) throws  Exception;
-
-
-
 }

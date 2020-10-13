@@ -7,9 +7,10 @@
 <h2><spring:message code="board.header.register" /></h2>
 
 <form:form modelAttribute="board" action="register">
+
     <table>
         <tr>
-            <td><spring:message code="board.title" /></td>
+            <td>요양원명</td>
             <td><form:input path="title" /></td>
             <td><font color="red"><form:errors path="title" /></font></td>
         </tr>
@@ -23,7 +24,20 @@
             <td><form:textarea path="content" /></td>
             <td><font color="red"></font><form:errors path="content"/></td>
         </tr>
+        <tr>
+            <td>별점</td>
+            <td><form:select path="rating">
+                <form:option value="1" label="★☆☆☆☆"/>
+                <form:option value="2" label="★★☆☆☆"/>
+                <form:option value="3" label="★★★☆☆"/>
+                <form:option value="4" label="★★★★☆"/>
+                <form:option value="5" label="★★★★★"/>
+                </form:select>
+            </td>
+        </tr>
+
     </table>
+
 </form:form>
 
 <div>
