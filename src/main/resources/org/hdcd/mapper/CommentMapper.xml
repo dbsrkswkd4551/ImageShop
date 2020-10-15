@@ -5,47 +5,39 @@
 
 <mapper namespace="org.hdcd.mapper.CommentMapper">
 
-	<select id="commentCount" resultType="int">
-		SELECT COUNT(*)
-		FROM comment
-	</select>
 
-	<select id="commentList" resultType="Comment">
+	<select id="list" resultType="Comment">
 		SELECT *
 		FROM comment
+		WHERE board_no = #{boardNo}
 	</select>
 
-	<insert id="commentInsert" parameterType="Comment">
+	<insert id="insert" parameterType="Comment">
 		INSERT INTO comment
 		(
-			comment_id,
 			board_no,
 			content,
-			wrtier,
-			reg_date
+			wrtier
 		)
 		VALUES
 		(
-			#{commentId},
 			#{boardNo},
 			#{content},
-			#{writer},
-			now()
+			#{wrtier}
 		)
 	</insert>
 
-	<update id="commentUpdate" parameterType="Comment">
+	<update id="update" parameterType="Comment">
 		UPDATE comment
 		SET content = #{content}
 		WHERE comment_id = #{commentId}
 	</update>
 
-	<delete id="commentDelete" parameterType="int">
+	<delete id="delete" parameterType="int">
 		DELETE
 		FROM comment
 		WHERE comment_id = #{commentId}
 	</delete>
-
 
 
 

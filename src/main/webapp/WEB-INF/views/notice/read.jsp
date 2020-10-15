@@ -34,11 +34,33 @@
     <button type="submit" id="btnList"><spring:message code="action.list" /></button>
 </div>
 
+<!-- 댓글 작성 form -->
+<div class="container">
+    <label for="content">comment</label>
+    <form id="commentInsertForm" name="commentInsertForm">
+        <div class="input-group">
+        <input type="text" class="form-control" id="content" placeholder="댓글 작성">
+        <span class="input-group-btn">
+            <button class="btn btn-default" type="submit" id="commentInsertBtn">등록</button>
+        </span>
+        </div>
+    </form>
+</div>
+
+<!-- 댓글 출력 form -->
+<div class="container">
+    <div class="commentList"></div>
+
+</div>
+
+
 <script type="text/javascript"
 
         src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 
 <script type="text/javascript">
+
+
     $(document).ready(function() {
         var formObj = $("#board");
 
@@ -63,5 +85,9 @@
         $("#btnList").on("click", function() {
             self.location = "list";
         });
+
+
     });
+
+
 </script>

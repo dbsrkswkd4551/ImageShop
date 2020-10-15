@@ -83,7 +83,7 @@ public class FAQController {
 
         rttr.addFlashAttribute("msg", "SUCCESS");
 
-        return "redirect:/notice/list";
+        return "redirect:/faq/list";
     }
 
     @RequestMapping(value = "/modify", method = RequestMethod.GET)
@@ -106,6 +106,6 @@ public class FAQController {
 
         rttr.addFlashAttribute("msg", "SUCCESS");
 
-        return "redirect:/notice/list";
+        return "redirect:/faq/list";
     }
 }

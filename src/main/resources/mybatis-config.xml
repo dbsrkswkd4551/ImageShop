@@ -12,4 +12,10 @@
         <package name="org.hdcd.domain" />
     </typeAliases>
 
+    <!--
+    <typeAliases>
+        <typeAlias type="org.hdcd.domain.Board" alias="Board"/>
+        <typeAlias type="org.hdcd.domain.Comment" alias="Comment"/>
+    </typeAliases>
+    -->
 </configuration>

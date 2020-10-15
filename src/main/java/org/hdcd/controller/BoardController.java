@@ -31,6 +31,9 @@ public class BoardController {
     @Autowired
     private BoardService service;
 
+    @Autowired
+    private CommentService Commentservice;
+
 
     @RequestMapping(value = "/register", method = RequestMethod.GET)
     @PreAuthorize("hasRole('ROLE_MEMBER')")
@@ -84,12 +87,16 @@ public class BoardController {
 
     @RequestMapping(value = "/read", method = RequestMethod.GET)
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_MEMBER')")
-    public void read(int boardNo, @ModelAttribute("pgrq") PageRequest pageRequest, Model model) throws Exception {
+    public void read(int boardNo, @ModelAttribute("pgrq") PageRequest pageRequest, Model model, Comment comment) throws Exception {
         Board board = service.read(boardNo);
 
         model.addAttribute(board);
-        //model.addAttribute("Comment", new Comment());
 
+        //model.addAttribute("list", Commentservice.list(pageRequest));
+
+        List<Comment> List = Commentservice.list(comment);
+
+        model.addAttribute("list", List);
     }
 
     @RequestMapping(value = "/remove", method = RequestMethod.POST)
@@ -130,4 +137,32 @@ public class BoardController {
         return "redirect:/board/list";
     }
 
+    @RequestMapping(value = "/repRegister", method = RequestMethod.GET)
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_MEMBER')")
+    public void repRegisterForm(Model model, Authentication authentication) throws Exception {
+        CustomUser customUser = (CustomUser) authentication.getPrincipal();
+        Member member = customUser.getMember();
+
+        Board board = new Board();
+
+        board.setWriter(member.getUserId());
+
+        model.addAttribute(board);
+
+        Comment comment = new Comment();
+
+        comment.setWriter(member.getUserId());
+
+        model.addAttribute(comment);
+    }
+
+    @RequestMapping(value = "/repRegister", method = RequestMethod.POST)
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_MEMBER')")
+    public String repRegister(Comment comment, RedirectAttributes rttr) throws Exception {
+        Commentservice.insert(comment);
+
+        rttr.addFlashAttribute("msg", "SUCCESS");
+
+        return "redirect:/board/read"; //원래 read 페이지로 돌아갈 방법 강구
+    }
 }

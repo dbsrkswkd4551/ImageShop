@@ -4,6 +4,7 @@ import org.hdcd.common.domain.CodeLabelValue;
 import org.hdcd.common.domain.PageRequest;
 import org.hdcd.common.domain.Pagination;
 import org.hdcd.domain.Board;
+import org.hdcd.domain.Comment;
 import org.hdcd.domain.Notice;
 import org.hdcd.service.BoardService;
 import org.hdcd.service.CommentService;
@@ -67,6 +68,8 @@ public class NoticeController {
         searchTypeCodeValueList.add(new CodeLabelValue("tc", "Title OR Content"));
 
         model.addAttribute("searchTypeCodeValueList", searchTypeCodeValueList);
+
+
     }
 
     @RequestMapping(value = "/read", method = RequestMethod.GET)
@@ -74,6 +77,7 @@ public class NoticeController {
         Board board = service.read(boardNo);
 
         model.addAttribute(board);
+
     }
 
     @RequestMapping(value = "/remove", method = RequestMethod.POST)

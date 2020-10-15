@@ -1,5 +1,6 @@
 package org.hdcd.service;
 
+import org.hdcd.common.domain.PageRequest;
 import org.hdcd.domain.Comment;
 import org.hdcd.mapper.CommentMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,22 +15,24 @@ public class CommentServiceImpl implements CommentService{
     private CommentMapper mapper;
 
     @Override
-    public List<Comment> commentList() throws Exception{
-        return mapper.commentList();
+    public List<Comment> list(Comment comment) throws Exception{
+        return mapper.list(comment);
     }
 
     @Override
-    public int commentInsert(Comment comment) throws Exception{
-        return mapper.commentInsert(comment);
+    public int insert(Comment comment) throws Exception{
+        return mapper.insert(comment);
     }
 
     @Override
-    public int commentUpdate(Comment comment) throws Exception{
-        return mapper.commentUpdate(comment);
+    public int update(Comment comment) throws Exception{
+        return mapper.update(comment);
     }
 
     @Override
-    public int commentDelete(int commentId) throws Exception{
-        return mapper.commentDelete(commentId);
+    public int delete(int commentId) throws Exception{
+        return mapper.delete(commentId);
     }
+
+
 }
