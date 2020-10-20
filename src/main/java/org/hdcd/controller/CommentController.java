@@ -1,86 +1,88 @@
 package org.hdcd.controller;
 
+import lombok.AllArgsConstructor;
+import lombok.extern.log4j.Log4j;
+import org.hdcd.common.domain.PageRequest;
 import org.hdcd.domain.Comment;
 import org.hdcd.service.CommentService;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import java.util.List;
-import java.util.logging.Logger;
 
-@Controller
-@RequestMapping("/comment")//
+@RestController
+@RequestMapping("/replies")
+@Log4j
+@AllArgsConstructor
 public class CommentController {
-    /*
 
-    @Autowired
     private CommentService service;
 
-    @RequestMapping(value = "", method = RequestMethod.POST)
-    public ResponseEntity<String> register(@RequestBody Comment comment){
+    @PostMapping(value = "/new",
+            consumes = "application/json",
+            produces = {MediaType.TEXT_PLAIN_VALUE})
+    public ResponseEntity<String> create(@RequestBody Comment comment){
 
+        log.info("ReplyVO: " + comment);
 
-        try{
-            service.commentInsert(comment);
-            return new ResponseEntity<>("ReplyRegisterOK", HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
-        }
+        int insertCount = service.register(comment);
+
+        log.info("Reply INSERT COUNT : " + insertCount);
+
+        return insertCount == 1
+                ? new ResponseEntity<>("success", HttpStatus.OK)
+                : new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        // 삼항 연산자 처리
     }
 
-    @RequestMapping(value = "/{commentId}", method = {RequestMethod.PUT, RequestMethod.PATCH})
-    public ResponseEntity<String> update(@PathVariable("commentId") Integer commentId,
-                                         @RequestBody Comment comment){
+    @GetMapping(value = "/pages/{boardNo}/{page}",
+            produces = {
+                    MediaType.APPLICATION_XML_VALUE,
+                    MediaType.APPLICATION_JSON_UTF8_VALUE})
+    public ResponseEntity<List<Comment>> getList(
+            @PathVariable("page") int page,
+            @PathVariable("boardNo") int boardNo){
 
-        try{
-            comment.setCommentId(commentId);
-            service.commentUpdate(comment);
-            return new ResponseEntity<>("ReplyUpdateOK", HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
-        }
+        log.info("getList .....................");
+        PageRequest pgrq = new PageRequest();
+        log.info(pgrq);
+
+        return new ResponseEntity<>(service.getList(pgrq, boardNo), HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/{commentId}", method = RequestMethod.DELETE)
-    public ResponseEntity<String> delete(@PathVariable("commentId") Integer commentId){
+    @DeleteMapping(value = "/{commnetId}",
+            produces = {
+                    MediaType.APPLICATION_XML_VALUE})
+    public ResponseEntity<String> remove(
+            @PathVariable("commentId") int commentId){
 
-        try{
-            service.commentDelete(commentId);
-            return new ResponseEntity<>("ReplyDeleteOK", HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
-        }
+        log.info("remove" + commentId);
+
+        return service.remove(commentId) == 1
+                ? new ResponseEntity<>("success", HttpStatus.OK)
+                : new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    @RequestMapping("/list")
-    @ResponseBody
-    private List<Comment> list(Model model) throws Exception{
-        return service.commentList();
+    @RequestMapping(method = {RequestMethod.PUT, RequestMethod.PATCH},
+            value = "/{commentId}",
+            consumes = "application/json",
+            produces = {MediaType.TEXT_PLAIN_VALUE})
+    public ResponseEntity<String> modify(
+            @RequestBody Comment comment,
+            @PathVariable("commentId") int commentId){
+
+        comment.setCommentId(commentId);
+        log.info("commentId : " + commentId);
+        log.info("modify : " + comment);
+
+        return service.modify(comment) == 1
+                ? new ResponseEntity<>("success", HttpStatus.OK)
+                : new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
-
-    @RequestMapping("/insert")
-    @ResponseBody
-    private void insert(@RequestBody Comment comment, @RequestParam int boardNo, @RequestParam String content, @RequestParam String writer) throws Exception{
-
-        service.commentInsert(comment);
-    }
-
-
-    @RequestMapping("/delete/{comment_id}")
-    @ResponseBody
-    private int delete(@PathVariable int commentId) throws Exception{
-        return service.commentDelete(commentId);
-    }
-
-     */
-
-
-
-
 
 }

@@ -6,12 +6,13 @@ import org.hdcd.domain.Comment;
 
 
 public interface CommentService {
-    public List<Comment> list(Comment comment) throws Exception;
+    public int register(Comment comment);
 
-    public int insert(Comment comment) throws Exception;
+    public Comment get(int commentId);
 
-    public int update(Comment comment) throws Exception;
+    public int modify(Comment comment);
 
-    public int delete(int commentId) throws Exception;
+    public int remove(int commentId);
 
+    public List<Comment> getList(PageRequest pgrq, int boardNo);
 }

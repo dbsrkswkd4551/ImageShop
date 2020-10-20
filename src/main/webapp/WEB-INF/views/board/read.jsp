@@ -67,54 +67,27 @@
 <br/><br/>
 
     <!-- 댓글 작성 form-->
-    <div>
-        <sec:authentication property="principal" var="pinfo"/>
-
-        <sec:authorize access="hasRole('ROLE_ADMIN')">
-            <button type="submit" id="btnEditRep"><spring:message code="action.edit" /></button>
-            <button type="submit" id="btnRemoveRep"><spring:message code="action.remove" /></button>
-            <button type="submit" id="btnRegisterRep"><spring:message code="action.remove" /></button>
-        </sec:authorize>
-
-        <sec:authorize access="hasRole('ROLE_MEMBER')">
-            <button type="submit" id="btnRegisterRep" class="btn-primary">등록</button>
-            <c:if test="${pinfo.username eq board.writer}">
-                <button type="submit" id="btnEditRep" class="btn-primary"><spring:message code="action.edit" /></button>
-                <button type="submit" id="btnRemoveRep" class="btn-primary"><spring:message code="action.remove" /></button>
-            </c:if>
-        </sec:authorize>
-
-    </div>
 
 
     <!-- 댓글 출력 form -->
-    <table border="1">
-        <tr>
-            <th align="center" width="320">내용</th>
-            <th align="center" width="100"><spring:message code="board.writer" /></th>
-            <th align="center" width="180"><spring:message code="board.regdate" /></th>
-        </tr>
-    <c:choose>
-    <c:when test="${empty list}">
-        <tr>
-            <td colspan="3">
-                <spring:message code="common.listEmpty" />
-            </td>
-        </tr>
-    </c:when>
-    <c:otherwise>
-        <c:forEach items="${list}" var="comment">
-            <tr>
-                <td>${comment.content}</td>
-                <td>${comment.writer}</td>
-                <td>${comment.regDate}</td>
-            </tr>
-        </c:forEach>
-    </c:otherwise>
-    </c:choose>
 
-    </table>
 
+<div class="container">
+    <label for="content">comment</label>
+    <form name="commentInsertForm">
+        <div class="input-group">
+            <input type="hidden" name="boardNo" value="${board.boardNo}"/>
+            <input type="text" class="form-control" id="content" name="content" placeholder="내용을 입력하세요.">
+            <span class="input-group-btn">
+                    <button class="btn btn-default" type="button" name="commentInsertBtn">등록</button>
+               </span>
+        </div>
+    </form>
+</div>
+
+<div class="container">
+    <div class="commentList"></div>
+</div>
 
 
 <script type="text/javascript"
@@ -122,39 +95,94 @@
         src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 
 <script type="text/javascript">
-    $(document).ready(function() {
-        var formObj = $("#board");
-        //1~10
-        var pageObj = $("#page");
-        var sizePerPageObj = $("#sizePerPage");
-        var pageVal = pageObj.val();
-        var sizePerPageVal = sizePerPageObj.val();
-        $("#btnEdit").on("click", function() {
-            var boardNo = $("#boardNo");
-            var boardNoVal = boardNo.val();
-            self.location = "/board/modify${pgrq.toUriString()}" + "&boardNo=" + boardNoVal;
-        });
-        $("#btnRemove").on("click", function() {
-            formObj.attr("action", "/board/remove");
-            formObj.submit();
-        });
-        $("#btnList").on("click", function() {
-            self.location = "/board/list${pgrq.toUriString()}";
-        });
 
-        var formObj2 = $("#comment");
-        $("#btnEditRep").on("click", function() {
-            var boardNo = $("#boardNo");
-            var boardNoVal = boardNo.val();
-            self.location = "/board/repRegister${pgrq.toUriString()}" + "&boardNo=" + boardNoVal;
-        });
-        $("#btnRemoveRep").on("click", function() {
-            formObj.attr("action", "/board/remove");
-            formObj.submit();
-        });
-        $("#btnRegisterRep").on("click", function() {
-            self.location = "/board/list${pgrq.toUriString()}";
-        });
+    var boardNo = '${board.boardNo}'; //게시글 번호
 
+    $('[name=commentInsertBtn]').click(function(){ //댓글 등록 버튼 클릭시
+        var insertData = $('[name=commentInsertForm]').serialize(); //commentInsertForm의 내용을 가져옴
+        commentInsert(insertData); //Insert 함수호출(아래)
     });
+
+
+
+    //댓글 등록
+    function commentInsert(insertData){
+        $.ajax({
+            url : '/comment/insert',
+            type : 'post',
+            data : insertData,
+            success : function(data){
+                if(data == 1) {
+                    commentList(); //댓글 작성 후 댓글 목록 reload
+                    $('[name=content]').val('');
+                }
+            }
+        });
+    }
+
+    function commentList(){
+        $.ajax({
+            url : '/comment/list',
+            type : 'get',
+            data : {'boardNo':boardNo},
+            success : function(data){
+                var a ='';
+                $.each(data, function(key, value){
+                    a += '<div class="commentArea" style="border-bottom:1px solid darkgray; margin-bottom: 15px;">';
+                    a += '<div class="commentInfo'+value.commentId+'">'+'댓글번호 : '+value.commentId+' / 작성자 : '+value.writer;
+                    a += '<a onclick="commentUpdate('+value.commentId+',\''+value.content+'\');"> 수정 </a>';
+                    a += '<a onclick="commentDelete('+value.commentId+');"> 삭제 </a> </div>';
+                    a += '<div class="commentContent'+value.commentId+'"> <p> 내용 : '+value.content +'</p>';
+                    a += '</div></div>';
+                });
+
+                $(".commentList").html(a);
+            }
+        });
+    }
+
+    //댓글 수정 - 댓글 내용 출력을 input 폼으로 변경
+    function commentUpdate(commentId, content){
+        var a ='';
+
+        a += '<div class="input-group">';
+        a += '<input type="text" class="form-control" name="content_'+commentId+'" value="'+content+'"/>';
+        a += '<span class="input-group-btn"><button class="btn btn-default" type="button" onclick="commentUpdateProc('+commentId+');">수정</button> </span>';
+        a += '</div>';
+
+        $('.commentContent'+commentId).html(a);
+
+    }
+
+    //댓글 수정
+    function commentUpdateProc(commentId){
+        var updateContent = $('[name=content_'+commentId+']').val();
+
+        $.ajax({
+            url : '/comment/update',
+            type : 'post',
+            data : {'content' : updateContent, 'commentId' : commentId},
+            success : function(data){
+                if(data == 1) commentList(boardNo); //댓글 수정후 목록 출력
+            }
+        });
+    }
+
+    //댓글 삭제
+    function commentDelete(commentId){
+        $.ajax({
+            url : '/comment/delete/'+commentId,
+            type : 'post',
+            success : function(data){
+                if(data == 1) commentList(boardNo); //댓글 삭제후 목록 출력
+            }
+        });
+    }
+
+
+    $(document).ready(function(){
+        commentList(); //페이지 로딩시 댓글 목록 출력
+    });
+
+
 </script>

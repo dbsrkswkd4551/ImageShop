@@ -1,5 +1,6 @@
 package org.hdcd.mapper;
 
+import org.apache.ibatis.annotations.Param;
 import org.hdcd.common.domain.PageRequest;
 import org.hdcd.domain.Comment;
 import org.springframework.stereotype.Repository;
@@ -8,22 +9,19 @@ import java.util.List;
 
 @Repository("org.hdcd.mapper.CommentMapper")
 public interface CommentMapper {
-    /*
-
-    // 댓글 개수
-    public int commentCount() throws Exception;
-
-    // 댓글 목록
-    public List<CommentVO> commentList() throws Exception;
 
     // 댓글 작성
-    public int commentInsert(CommentVO comment) throws Exception;
+    public int insert(Comment comment);
+
+    public Comment read(int boardNo);
 
     // 댓글 수정
-    public int commentUpdate(CommentVO comment) throws Exception;
+    public int update(Comment comment);
 
     // 댓글 삭제
-    public int commentDelete(int cno) throws Exception;
+    public int delete(int commentId);
 
-     */
+    public List<Comment> getListWithPaging(@Param("pgrq") PageRequest pageRequest, @Param("boardNo") int boardNo);
+
+
 }

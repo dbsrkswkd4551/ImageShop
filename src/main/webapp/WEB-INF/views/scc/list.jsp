@@ -7,6 +7,27 @@
 
 <h2>요양원 리스트</h2>
 
+<form>
+    <select name="search" onchange="Change(this)">
+        <option value="none">=== 선택 ===</option>
+        <option value="gangnam">강남구</option>
+        <option value="gangseo">강서구</option>
+    </select>
+</form>
+
+<table>
+    <tr>
+        <td id="select">선택</td>
+    </tr>
+    <tr>
+        <td id="gangnam">강남구</td>
+    </tr>
+    <tr>
+        <td id="gangseo">강서구</td>
+    </tr>
+
+</table>
+
 <form:form modelAttribute="pgn" method="get" action="list${pgn.toUriStringByPage(1)}">
     <form:select path="searchType" items="${searchTypeCodeValueList}" itemValue="value" itemLabel="label"/>
     <form:input path="keyword"/>
@@ -53,5 +74,17 @@
 
     if (result === "SUCCESS") {
         alert("<spring:message code='common.processSuccess' />");
+    }
+
+    $(document).ready(function() {
+
+        $("#gangnam").on("click", function() { self.location = "/scc/list?searchType=d&keyword=강남구"});
+        $("#gangseo").on("click", function() { self.location = "/scc/list?searchType=d&keyword=강서구"});
+
+    });
+
+    function Change(e) {
+        if(e.value == "gangnam"){ self.location = "/scc/list?searchType=d&keyword=강남구"}
+        if(e.value == "gangseo"){ self.location = "/scc/list?searchType=d&keyword=강서구"}
     }
 </script>

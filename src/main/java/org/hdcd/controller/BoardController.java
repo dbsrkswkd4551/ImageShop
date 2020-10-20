@@ -1,9 +1,7 @@
 package org.hdcd.controller;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.hdcd.common.domain.CodeLabelValue;
 import org.hdcd.common.domain.PageRequest;
@@ -13,7 +11,6 @@ import org.hdcd.domain.Board;
 import org.hdcd.domain.Comment;
 import org.hdcd.domain.Member;
 import org.hdcd.service.BoardService;
-import org.hdcd.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
@@ -31,8 +28,6 @@ public class BoardController {
     @Autowired
     private BoardService service;
 
-    @Autowired
-    private CommentService Commentservice;
 
 
     @RequestMapping(value = "/register", method = RequestMethod.GET)
@@ -60,7 +55,7 @@ public class BoardController {
 
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_MEMBER')")
+    //@PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_MEMBER')")
     public void list(@ModelAttribute("pgrq") PageRequest pageRequest, Model model) throws Exception {
         model.addAttribute("list", service.list(pageRequest));
 
@@ -86,7 +81,7 @@ public class BoardController {
     }
 
     @RequestMapping(value = "/read", method = RequestMethod.GET)
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_MEMBER')")
+    //@PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_MEMBER')")
     public void read(int boardNo, @ModelAttribute("pgrq") PageRequest pageRequest, Model model, Comment comment) throws Exception {
         Board board = service.read(boardNo);
 
@@ -94,9 +89,6 @@ public class BoardController {
 
         //model.addAttribute("list", Commentservice.list(pageRequest));
 
-        List<Comment> List = Commentservice.list(comment);
-
-        model.addAttribute("list", List);
     }
 
     @RequestMapping(value = "/remove", method = RequestMethod.POST)
@@ -159,7 +151,6 @@ public class BoardController {
     @RequestMapping(value = "/repRegister", method = RequestMethod.POST)
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_MEMBER')")
     public String repRegister(Comment comment, RedirectAttributes rttr) throws Exception {
-        Commentservice.insert(comment);
 
         rttr.addFlashAttribute("msg", "SUCCESS");
 

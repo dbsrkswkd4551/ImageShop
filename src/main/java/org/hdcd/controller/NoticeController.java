@@ -4,10 +4,6 @@ import org.hdcd.common.domain.CodeLabelValue;
 import org.hdcd.common.domain.PageRequest;
 import org.hdcd.common.domain.Pagination;
 import org.hdcd.domain.Board;
-import org.hdcd.domain.Comment;
-import org.hdcd.domain.Notice;
-import org.hdcd.service.BoardService;
-import org.hdcd.service.CommentService;
 import org.hdcd.service.NoticeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -28,8 +24,6 @@ public class NoticeController {
     @Autowired
     private NoticeService service;
 
-    @Autowired
-    private CommentService commentService;
 
     @RequestMapping(value = "/register", method = RequestMethod.GET)
     @PreAuthorize("hasRole('ROLE_ADMIN')")

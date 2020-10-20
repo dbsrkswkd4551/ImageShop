@@ -35,6 +35,7 @@ public class sccController {
 
         model.addAttribute("pageRequest", pageRequest);
 
+
         List<CodeLabelValue> searchTypeCodeValueList = new ArrayList<CodeLabelValue>();
         searchTypeCodeValueList.add(new CodeLabelValue("n", "---"));
         searchTypeCodeValueList.add(new CodeLabelValue("t", "시설명"));
