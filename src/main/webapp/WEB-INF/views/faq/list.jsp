@@ -36,7 +36,7 @@
             <c:forEach items="${list}" var="board" varStatus="status">
                 <tr>
                     <td align="center">${pagination.totalCount - ((pageRequest.page - 1) * pagination.displayPageNum + status.index)}</td>
-                    <td align="left"><a href="/notice/read${pgrq.toUriString(pgrq.page)}&boardNo=${board.boardNo}"><c:out value="${board.title}" /></a></td>
+                    <td align="left"><a href="/faq/read${pgrq.toUriString(pgrq.page)}&boardNo=${board.boardNo}"><c:out value="${board.title}" /></a></td>
                     <td align="center"><fmt:formatDate pattern="yy-MM-dd HH:mm" value="${board.regDate}"/></td>
                 </tr>
             </c:forEach>
@@ -50,7 +50,7 @@
     </c:if>
 
     <c:forEach begin="${pagination.startPage }" end="${pagination.endPage }" var="idx">
-        <a href="/notice/list${pageRequest.toUriString(idx)}">${idx}</a>
+        <a href="/faq/list${pageRequest.toUriString(idx)}">${idx}</a>
     </c:forEach>
 
     <c:if test="${pagination.next && pagination.endPage > 0}">

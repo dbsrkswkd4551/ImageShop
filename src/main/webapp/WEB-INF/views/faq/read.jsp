@@ -53,11 +53,11 @@
             var boardNo = $("#boardNo");
             var boardNoVal = boardNo.val();
 
-            self.location = "/notice/modify${pgrq.toUriString()}" + "&boardNo=" + boardNoVal;
+            self.location = "/faq/modify${pgrq.toUriString()}" + "&boardNo=" + boardNoVal;
         });
 
         $("#btnRemove").on("click", function() {
-            formObj.attr("action", "/notice/remove");
+            formObj.attr("action", "/faq/remove");
             formObj.submit();
         });
 
