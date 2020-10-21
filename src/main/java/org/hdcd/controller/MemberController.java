@@ -115,7 +115,6 @@ public class MemberController {
         if(service.countAll() == 0) {
             String inputPassword = member.getUserPw();
             member.setUserPw(passwordEncoder.encode(inputPassword));
-
             member.setJob("00");
 
             service.setupAdmin(member);

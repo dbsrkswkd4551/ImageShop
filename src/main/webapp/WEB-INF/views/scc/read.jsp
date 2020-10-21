@@ -73,6 +73,8 @@
     });
 </script>
 
+</br>
+<button><a href="/board/list?searchType=t&keyword=${scc_info.SCCNAME}">리뷰 보기</a></button>
 
 </body>
 </html>

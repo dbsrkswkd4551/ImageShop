@@ -4,8 +4,10 @@ import org.hdcd.common.domain.CodeLabelValue;
 import org.hdcd.common.domain.PageRequest;
 import org.hdcd.common.domain.Pagination;
 import org.hdcd.domain.Board;
+import org.hdcd.domain.Comment;
 import org.hdcd.domain.Notice;
 import org.hdcd.service.BoardService;
+import org.hdcd.service.CommentService;
 import org.hdcd.service.NoticeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -25,6 +27,9 @@ public class NoticeController {
 
     @Autowired
     private NoticeService service;
+
+    @Autowired
+    private CommentService commentService;
 
     @RequestMapping(value = "/register", method = RequestMethod.GET)
     @PreAuthorize("hasRole('ROLE_ADMIN')")
@@ -66,10 +71,14 @@ public class NoticeController {
     }
 
     @RequestMapping(value = "/read", method = RequestMethod.GET)
-    public void read(int boardNo, @ModelAttribute("pgrq") PageRequest pageRequest, Model model) throws Exception {
+    public String read(int boardNo, @ModelAttribute("pgrq") PageRequest pageRequest, Model model) throws Exception {
         Board board = service.read(boardNo);
+        Comment comment = commentService.commentList();
 
+        model.addAttribute(comment);
         model.addAttribute(board);
+
+        return "notice/read";
     }
 
     @RequestMapping(value = "/remove", method = RequestMethod.POST)

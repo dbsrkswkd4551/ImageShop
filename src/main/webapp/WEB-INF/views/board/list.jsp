@@ -29,7 +29,7 @@
     <c:choose>
         <c:when test="${empty list}">
             <tr>
-                <td colspan="4">
+                <td colspan="5">
                     <spring:message code="common.listEmpty" />
                 </td>
             </tr>

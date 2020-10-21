@@ -8,7 +8,7 @@ public interface CommentMapper {
 
     public int commentCount() throws Exception;
 
-    public List<Comment> commentList() throws Exception;
+    public Comment commentList() throws Exception;
 
     public int commentInsert(Comment comment) throws Exception;
 

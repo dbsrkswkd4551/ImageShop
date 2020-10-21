@@ -34,6 +34,19 @@
     <button type="submit" id="btnList"><spring:message code="action.list" /></button>
 </div>
 
+<table>
+    <tr>
+        <td>${comment.content}</td>
+        <td>작성자: ${comment.writer}</td>
+        <td>등록일: ${comment.regDate}</td>
+        <sec:authorize access="hasRole('ROLE_ADMIN')">
+            <button id="commentModify"><a href="" >수정</a></button>
+            <button id="commentRemove"><a href="" >삭제</a></button>
+        </sec:authorize>
+    </tr>
+</table>
+
+
 <script type="text/javascript"
 
         src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>

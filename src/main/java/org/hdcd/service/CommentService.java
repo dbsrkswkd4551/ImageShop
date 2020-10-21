@@ -4,7 +4,7 @@ import org.hdcd.domain.Comment;
 
 
 public interface CommentService {
-    public List<Comment> commentList() throws Exception;
+    public Comment commentList() throws Exception;
 
     public int commentInsert(Comment comment) throws Exception;
 

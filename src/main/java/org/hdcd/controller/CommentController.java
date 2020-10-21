@@ -16,11 +16,6 @@ public class CommentController {
     @Autowired
     CommentService service;
 
-    @RequestMapping("/list")
-    @ResponseBody
-    private List<Comment> list(Model model) throws Exception{
-        return service.commentList();
-    }
 
     @RequestMapping("/insert")
     @ResponseBody
