@@ -30,6 +30,7 @@ public class MemberController {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+
     @RequestMapping(value = "/register", method = RequestMethod.GET)
     public void registerForm(Member member, Model model) throws Exception {
         String groupCode = "A01";

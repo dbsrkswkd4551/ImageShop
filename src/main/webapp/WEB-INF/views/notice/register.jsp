@@ -3,7 +3,7 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
-<h2>자주하는 질문 등록</h2>
+<h2>공지사항 등록</h2>
 
 <form:form modelAttribute="board" action="register">
     <table>
